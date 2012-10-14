@@ -8,15 +8,15 @@ A Clojure library to convert between different word case conventions.
 
 2. Add the following to your `project.clj`:
 
-```clojure
-:dependencies [... [camel-snake-kebab "0.1.0-SNAPSHOT"]]
-```
+  ```clojure
+  :dependencies [... [camel-snake-kebab "0.1.0-SNAPSHOT"]]
+  ```
 
 3. Add the following to your namespace declaration:
 
-```clojure
-:use camel-snake-kebab
-```
+  ```clojure
+  :use camel-snake-kebab
+  ```
 
 ## Available Conversion Functions
 
