@@ -41,6 +41,21 @@ You should be able to figure out all what all of them do.
 ; => :object-id
 ```
 
+## Serving Suggestions
+
+### Clojurizing JSON Data
+
+```clojure
+(defn map-keys [f m] (apply hash-map (mapcat (fn [[k v]] [(f k) v]) m)))
+
+(def clojurize-json (partial map-keys (comp ->kebab-case keyword)))
+
+(clojurize-json {"firstName" "John", "lastName" "Smith"})
+; => {:last-name "Smith", :first-name "John"}
+```
+
+### TODO
+
 ## Further Reading
 
 * [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
