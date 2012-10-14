@@ -26,8 +26,8 @@
   #(split % word-separator-pattern))
 
 (defn format-case [first-fn rest-fn separator stringish]
-  (defn unparse [[first & rest]] (join separator (cons (first-fn first) (map rest-fn rest))))
-  (transform-stringish (comp unparse parse) stringish))
+  (letfn [(unparse [[first & rest]] (join separator (cons (first-fn first) (map rest-fn rest))))]
+    (transform-stringish (comp unparse parse) stringish)))
 
 (def ->CamelCase  (partial format-case capitalize capitalize ""))
 (def ->camelCase  (partial format-case lower-case capitalize ""))

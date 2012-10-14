@@ -10,6 +10,8 @@
   (is (= ["foo" "bar"] (parse "foo_bar")))
   (is (= ["FOO" "BAR"] (parse "FOO_BAR"))))
 
+(def zip (partial map vector))
+
 (deftest format-case-test
   (testing "examples"
     (is (= 'FluxCapacitor  (->CamelCase 'flux-capacitor)))
@@ -17,27 +19,11 @@
     (is (= :object-id      (->kebab-case :object_id))))
 
   (testing "all the combinations"
-    (def test-inputs
-      ["fooBar"
-       "FooBar"
-       "foo_bar"
-       "FOO_BAR"
-       "foo-bar"])
+    (let
+      [test-inputs    [ "fooBar"    "FooBar"    "foo_bar"    "FOO_BAR"    "foo-bar"]
+       test-functions [->camelCase ->CamelCase ->snake_case ->SNAKE_CASE ->kebab-case]
+       test-formats   [identity keyword symbol]]
 
-    (def test-functions
-      [->camelCase
-       ->CamelCase
-       ->snake_case
-       ->SNAKE_CASE
-       ->kebab-case])
-
-    (def test-formats
-      [identity
-       keyword
-       symbol])
-
-    (def zip (partial map vector))
-
-    (dorun
-      (for [input test-inputs, format test-formats, [output function] (zip test-inputs test-functions)]
-        (is (= (format output) (function (format input))))))))
+      (dorun
+        (for [input test-inputs, format test-formats, [output function] (zip test-inputs test-functions)]
+          (is (= (format output) (function (format input)))))))))
