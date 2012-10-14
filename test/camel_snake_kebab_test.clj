@@ -20,10 +20,10 @@
 
   (testing "all the combinations"
     (let
-      [test-inputs    [ "fooBar"    "FooBar"    "foo_bar"    "FOO_BAR"    "foo-bar"]
-       test-functions [->camelCase ->CamelCase ->snake_case ->SNAKE_CASE ->kebab-case]
-       test-formats   [identity keyword symbol]]
+      [inputs    [ "fooBar"    "FooBar"    "foo_bar"    "FOO_BAR"    "foo-bar"]
+       functions [->camelCase ->CamelCase ->snake_case ->SNAKE_CASE ->kebab-case]
+       formats   [identity keyword symbol]]
 
       (dorun
-        (for [input test-inputs, format test-formats, [output function] (zip test-inputs test-functions)]
+        (for [input inputs, format formats, [output function] (zip inputs functions)]
           (is (= (format output) (function (format input)))))))))
