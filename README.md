@@ -46,7 +46,9 @@ You should be able to figure out all what all of them do.
 ### Clojurizing JSON Data
 
 ```clojure
-(defn map-keys [f m] (apply hash-map (mapcat (fn [[k v]] [(f k) v]) m)))
+(defn map-keys [f m]
+  (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
+    (apply hash-map (mapcat mapper m))))
 
 (def clojurize-json (partial map-keys (comp ->kebab-case keyword)))
 
