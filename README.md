@@ -28,7 +28,11 @@ A Clojure library to convert between different word case conventions.
 
 You should be able to figure out all what all of them do.
 
-## Examples
+## Serving Suggestions
+
+```clojure
+(use 'camel-snake-kebab)
+```
 
 ```clojure
 (->CamelCase 'flux-capacitor)
@@ -41,22 +45,21 @@ You should be able to figure out all what all of them do.
 ; => :object-id
 ```
 
-## Serving Suggestions
-
-### Clojurizing JSON Data
+### With JSON
 
 ```clojure
 (defn map-keys [f m]
   (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
     (apply hash-map (mapcat mapper m))))
 
-(def clojurize-json (partial map-keys (comp ->kebab-case keyword)))
+(map-keys (comp ->kebab-case keyword) {"firstName" "John", "lastName" "Smith"})
+; => {:first-name "John", :last-name "Smith"}
 
-(clojurize-json {"firstName" "John", "lastName" "Smith"})
-; => {:last-name "Smith", :first-name "John"}
+; And back:
+
+(map-keys (comp ->camelCase name) {:first-name "John", :last-name "Smith"})
+; => {"firstName" "John", "lastName" "Smith"}
 ```
-
-### TODO
 
 ## Further Reading
 
