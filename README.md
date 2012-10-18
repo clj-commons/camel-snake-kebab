@@ -50,7 +50,7 @@ You should be able to figure out all what all of them do.
 ```clojure
 (defn map-keys [f m]
   (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
-    (apply hash-map (mapcat mapper m))))
+    (into {} (map mapper m))))
 
 (map-keys (comp ->kebab-case keyword) {"firstName" "John", "lastName" "Smith"})
 ; => {:first-name "John", :last-name "Smith"}
