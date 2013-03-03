@@ -4,15 +4,13 @@ A Clojure library to convert between different word case conventions.
 
 ## Setup
 
-1. Download the source code and execute `lein install`.
-
-2. Add the following to your `project.clj`:
+1. Add the following to your `project.clj` `:dependencies`:
 
   ```clojure
-  :dependencies [... [camel-snake-kebab "0.1.0-SNAPSHOT"]]
+  [camel-snake-kebab "0.1.0-SNAPSHOT"]
   ```
 
-3. Add the following to your namespace declaration:
+2. Add the following to your namespace declaration:
 
   ```clojure
   :use camel-snake-kebab
