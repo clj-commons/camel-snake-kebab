@@ -2,7 +2,22 @@
 
 A Clojure library to convert between different word case conventions.
 
-## Setup
+## Examples
+
+```clojure
+(use 'camel-snake-kebab)
+
+(->CamelCase 'flux-capacitor)
+; => 'FluxCapacitor
+
+(->SNAKE_CASE "I am constant")
+; => "I_AM_CONSTANT"
+
+(->kebab-case :object_id)
+; => :object-id
+```
+
+## Installation
 
 1. Add the following to your `project.clj` `:dependencies`:
 
@@ -26,24 +41,7 @@ A Clojure library to convert between different word case conventions.
 
 You should be able to figure out all what all of them do.
 
-## Serving Suggestions
-
-```clojure
-(use 'camel-snake-kebab)
-```
-
-```clojure
-(->CamelCase 'flux-capacitor)
-; => 'FluxCapacitor
-
-(->SNAKE_CASE "I am constant")
-; => "I_AM_CONSTANT"
-
-(->kebab-case :object_id)
-; => :object-id
-```
-
-### With JSON
+## A Serving Suggestion: Dealing with JSON Objects
 
 ```clojure
 (defn map-keys [f m]
