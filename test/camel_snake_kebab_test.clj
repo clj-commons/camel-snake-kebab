@@ -2,6 +2,8 @@
   (:use clojure.test
         camel-snake-kebab))
 
+(def parse @#'camel-snake-kebab/parse)
+
 (deftest parse-test
   (is (= ["foo" "bar"] (parse "foo bar")))
   (is (= ["foo" "bar"] (parse "foo-bar")))

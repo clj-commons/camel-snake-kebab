@@ -12,17 +12,17 @@
     :else (fail "Unhandled case: " (class x)))
    x))
 
-(def word-separators
+(def ^:private word-separators
   [" ", "_", "-"
  ; http://stackoverflow.com/a/2560017/339785 :
    "(?<=[A-Z])(?=[A-Z][a-z])"
    "(?<=[^A-Z_])(?=[A-Z])"
    "(?<=[A-Za-z])(?=[^A-Za-z])"])
 
-(def word-separator-pattern
+(def ^:private word-separator-pattern
   (->> word-separators (join "|") re-pattern))
 
-(def parse
+(def ^:private parse
   #(split % word-separator-pattern))
 
 (defn format-case [first-fn rest-fn separator stringish]
