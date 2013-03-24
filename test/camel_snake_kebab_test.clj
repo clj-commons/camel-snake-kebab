@@ -20,8 +20,16 @@
 
   (testing "all the combinations"
     (let
-      [inputs    [ "fooBar"    "FooBar"    "foo_bar"    "FOO_BAR"    "foo-bar"]
-       functions [->camelCase ->CamelCase ->snake_case ->SNAKE_CASE ->kebab-case]
+      [inputs    ["fooBar"
+                  "FooBar"
+                  "foo_bar"
+                  "FOO_BAR"
+                  "foo-bar"]
+       functions [->camelCase
+                  ->CamelCase
+                  ->snake_case
+                  ->SNAKE_CASE
+                  ->kebab-case]
        formats   [identity keyword symbol]]
 
       (dorun
