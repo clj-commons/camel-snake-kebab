@@ -20,15 +20,15 @@
 
   (testing "all the combinations"
     (let
-      [inputs    ["fooBar"
-                  "FooBar"
-                  "foo_bar"
+      [inputs    ["FooBar"
+                  "fooBar"
                   "FOO_BAR"
+                  "foo_bar"
                   "foo-bar"]
-       functions [->camelCase
-                  ->CamelCase
-                  ->snake_case
+       functions [->CamelCase
+                  ->camelCase
                   ->SNAKE_CASE
+                  ->snake_case
                   ->kebab-case]
        formats   [identity keyword symbol]]
 
