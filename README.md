@@ -15,6 +15,9 @@ A Clojure library to convert between different word case conventions.
 
 (->kebab-case :object_id)
 ; => :object-id
+
+(->HTTP-Header-Case "x-ssl-cipher")
+; => "X-SSL-Cipher"
 ```
 
 ## Installation
@@ -40,6 +43,7 @@ A Clojure library to convert between different word case conventions.
 * `->kebab-case`
 * `->Camel_Snake_Case`
 * `->Camel_snake_case`
+* `->HTTP-Header-Case`
 
 You should be able to figure out all what all of them do.
 

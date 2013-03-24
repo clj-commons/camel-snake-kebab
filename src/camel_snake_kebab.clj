@@ -37,3 +37,11 @@
 
 (def ->Camel_Snake_Case (partial format-case capitalize capitalize "_"))
 (def ->Camel_snake_case (partial format-case capitalize lower-case "_"))
+
+(def upper-case-http-headers #{"CPU" "DNT" "IP" "SSL" "TE" "UA" "XSS"})
+
+(defn- http-header-capitalize [x]
+  (or (upper-case-http-headers (upper-case x))
+      (capitalize x)))
+
+(def ->HTTP-Header-Case (partial format-case http-header-capitalize http-header-capitalize "-"))
