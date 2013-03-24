@@ -24,12 +24,16 @@
                   "fooBar"
                   "FOO_BAR"
                   "foo_bar"
-                  "foo-bar"]
+                  "foo-bar"
+                  "Foo_Bar"
+                  "Foo_bar"]
        functions [->CamelCase
                   ->camelCase
                   ->SNAKE_CASE
                   ->snake_case
-                  ->kebab-case]
+                  ->kebab-case
+                  ->Camel_Snake_Case
+                  ->Camel_snake_case]
        formats   [identity keyword symbol]]
 
       (dorun

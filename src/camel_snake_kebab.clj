@@ -34,3 +34,6 @@
 (def ->SNAKE_CASE (partial format-case upper-case upper-case "_"))
 (def ->snake_case (partial format-case lower-case lower-case "_"))
 (def ->kebab-case (partial format-case lower-case lower-case "-"))
+
+(def ->Camel_Snake_Case (partial format-case capitalize capitalize "_"))
+(def ->Camel_snake_case (partial format-case capitalize lower-case "_"))

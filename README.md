@@ -38,6 +38,8 @@ A Clojure library to convert between different word case conventions.
 * `->SNAKE_CASE`
 * `->snake_case`
 * `->kebab-case`
+* `->Camel_Snake_Case`
+* `->Camel_snake_case`
 
 You should be able to figure out all what all of them do.
 
