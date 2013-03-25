@@ -49,4 +49,5 @@
   (is (= "TE"               (->HTTP-Header-Case "te")))
   (is (= "UA-CPU"           (->HTTP-Header-Case "ua-cpu")))
   (is (= "X-SSL-Cipher"     (->HTTP-Header-Case "x-ssl-cipher")))
+  (is (= "X-WAP-Profile"    (->HTTP-Header-Case "x-wap-profile")))
   (is (= "X-XSS-Protection" (->HTTP-Header-Case "x-xss-protection"))))
