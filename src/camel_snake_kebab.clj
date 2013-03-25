@@ -40,8 +40,8 @@
 
 (def upper-case-http-headers #{"CPU" "DNT" "IP" "SSL" "TE" "UA" "XSS"})
 
-(defn- http-header-capitalize [x]
+(defn- capitalize-http-header [x]
   (or (upper-case-http-headers (upper-case x))
       (capitalize x)))
 
-(def ->HTTP-Header-Case (partial format-case http-header-capitalize http-header-capitalize "-"))
+(def ->HTTP-Header-Case (partial format-case capitalize-http-header capitalize-http-header "-"))
