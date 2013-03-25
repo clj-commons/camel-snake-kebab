@@ -66,6 +66,7 @@ You should be able to figure out all what all of them do.
 ## Further Reading
 
 * [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
+* [Wikipedia about usage of letter case in computer programming](http://en.wikipedia.org/wiki/Letter_case#Computers)
 
 ## License
 
