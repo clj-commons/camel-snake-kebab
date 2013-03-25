@@ -25,17 +25,17 @@
       [inputs    ["FooBar"
                   "fooBar"
                   "FOO_BAR"
+                  "Foo_bar"
                   "foo_bar"
                   "foo-bar"
-                  "Foo_Bar"
-                  "Foo_bar"]
+                  "Foo_Bar"]
        functions [->CamelCase
                   ->camelCase
                   ->SNAKE_CASE
+                  ->Snake_case
                   ->snake_case
                   ->kebab-case
-                  ->Camel_Snake_Case
-                  ->Camel_snake_case]
+                  ->Camel_Snake_Case]
        formats   [identity keyword symbol]]
 
       (dorun

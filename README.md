@@ -39,10 +39,10 @@ A Clojure library to convert between different word case conventions.
 * `->CamelCase`
 * `->camelCase`
 * `->SNAKE_CASE`
+* `->Snake_case`
 * `->snake_case`
 * `->kebab-case`
 * `->Camel_Snake_Case`
-* `->Camel_snake_case`
 * `->HTTP-Header-Case`
 
 You should be able to figure out all what all of them do.
