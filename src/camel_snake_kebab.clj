@@ -1,16 +1,14 @@
 (ns camel-snake-kebab
-  (:use [clojure.string :only (split join capitalize lower-case upper-case)]))
+  (:use [clojure.string :only (split join capitalize lower-case upper-case)])
+  (:import (clojure.lang Keyword Symbol)))
 
 (defprotocol Stringish
   (transform [this f]))
 
 (extend-protocol Stringish
-  String
-  (transform [this f] (-> this f))
-  clojure.lang.Keyword
-  (transform [this f] (-> this name f keyword))
-  clojure.lang.Symbol
-  (transform [this f] (-> this name f symbol)))
+  String  (transform [this f] (-> this f))
+  Keyword (transform [this f] (-> this name f keyword))
+  Symbol  (transform [this f] (-> this name f symbol)))
 
 (def ^:private word-separators
   [" ", "_", "-"
