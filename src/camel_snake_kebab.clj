@@ -1,16 +1,16 @@
 (ns camel-snake-kebab
   (:use [clojure.string :only (split join capitalize lower-case upper-case)]))
 
-(defn- fail [& xs]
-  (throw (Exception. (apply str xs))))
+(defprotocol Stringish
+  (transform [this f]))
 
-(defn- transform-stringish [f x]
-  ((cond
-    (string?  x) f
-    (keyword? x) (comp keyword f name)
-    (symbol?  x) (comp symbol  f name)
-    :else (fail "Unhandled case: " (class x)))
-   x))
+(extend-protocol Stringish
+  String
+  (transform [this f] (-> this f))
+  clojure.lang.Keyword
+  (transform [this f] (-> this name f keyword))
+  clojure.lang.Symbol
+  (transform [this f] (-> this name f symbol)))
 
 (def ^:private word-separators
   [" ", "_", "-"
@@ -27,7 +27,7 @@
 
 (defn format-case [first-fn rest-fn separator stringish]
   (letfn [(unparse [[first & rest]] (join separator (cons (first-fn first) (map rest-fn rest))))]
-    (transform-stringish (comp unparse parse) stringish)))
+    (transform stringish (comp unparse parse))))
 
 (def ->CamelCase  (partial format-case capitalize capitalize ""))
 (def ->camelCase  (partial format-case lower-case capitalize ""))
