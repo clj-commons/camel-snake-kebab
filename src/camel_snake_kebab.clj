@@ -13,7 +13,7 @@
 
 (def ^:private word-separator-pattern
   "A pattern that matches all known word separators."
-  (->> [" " "_" "-"
+  (->> ["\\s+" "_" "-"
         "(?<=[A-Z])(?=[A-Z][a-z])"
         "(?<=[^A-Z_-])(?=[A-Z])"
         "(?<=[A-Za-z])(?=[^A-Za-z])"]

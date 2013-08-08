@@ -7,6 +7,7 @@
 
 (deftest word-separator-pattern-test
   (is (= ["foo" "bar"] (separate-words "foo bar")))
+  (is (= ["foo" "bar"] (separate-words "foo\n\tbar")))
   (is (= ["foo" "bar"] (separate-words "foo-bar")))
   (is (= ["foo" "Bar"] (separate-words "fooBar")))
   (is (= ["Foo" "Bar"] (separate-words "FooBar")))
