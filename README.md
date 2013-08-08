@@ -47,13 +47,17 @@ A Clojure library to convert between different word case conventions.
 
 You should be able to figure out all what all of them do.
 
-## A Serving Suggestion: Dealing with JSON Objects
+## Serving Suggestions
 
 ```clojure
 (defn map-keys [f m]
   (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
     (into {} (map mapper m))))
+```
 
+### With JSON Objects
+
+```clojure
 (map-keys (comp ->kebab-case keyword) {"firstName" "John", "lastName" "Smith"})
 ; => {:first-name "John", :last-name "Smith"}
 
@@ -61,6 +65,16 @@ You should be able to figure out all what all of them do.
 
 (map-keys (comp ->camelCase name) {:first-name "John", :last-name "Smith"})
 ; => {"firstName" "John", "lastName" "Smith"}
+```
+
+### With JavaBeans
+
+```clojure
+(->> (java.util.Date.)
+     (bean)
+	 (map-keys ->kebab-case)
+	 :timezone-offset)
+; => -120
 ```
 
 ## Further Reading
