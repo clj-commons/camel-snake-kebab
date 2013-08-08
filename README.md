@@ -20,6 +20,13 @@ A Clojure library to convert between different word case conventions.
 ; => "X-SSL-Cipher"
 ```
 
+There are also functions that convert the value type for you:
+
+```clojure
+(->kebab-case-keyword "object_id")
+; => :object-id
+```
+
 ## Installation
 
 1. Add the following to your `project.clj` `:dependencies`:
@@ -46,6 +53,17 @@ A Clojure library to convert between different word case conventions.
 * `->HTTP-Header-Case`
 
 You should be able to figure out all what all of them do.
+
+Yeah, and then there are the type converting functions:
+
+* `->CamelCase{Keyword, String, Symbol}`
+* `->camelCase{Keyword, String, Symbol}`
+* `->SNAKE_CASE_{KEYWORD, STRING, SYMBOL}`
+* `->Snake_case_{keyword, string, symbol}`
+* `->snake_case_{keyword, string, symbol}`
+* `->kebab-case-{keyword, string, symbol}`
+* `->Camel_Snake_Case_{Keyword, String, Symbol}`
+* `->HTTP-Header-Case-{Keyword, String, Symbol}`
 
 ## Serving Suggestions
 
