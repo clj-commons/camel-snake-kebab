@@ -4,11 +4,9 @@
   (:import (clojure.lang Keyword Symbol)))
 
 (def ^:private upper-case-http-headers
-  "Headers that are matched against for converting to HTTP-Header_Case."
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})
 
 (defn- capitalize-http-header
-  "Uppercase x if it is an HTTP header, capitalize it otherwise."
   [x]
   (or (upper-case-http-headers (upper-case x))
       (capitalize x)))
