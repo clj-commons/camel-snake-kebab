@@ -76,12 +76,12 @@ Yeah, and then there are the type converting functions:
 ### With JSON Objects
 
 ```clojure
-(map-keys (comp ->kebab-case keyword) {"firstName" "John", "lastName" "Smith"})
+(map-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
 ; => {:first-name "John", :last-name "Smith"}
 
 ; And back:
 
-(map-keys (comp ->camelCase name) {:first-name "John", :last-name "Smith"})
+(map-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
 ; => {"firstName" "John", "lastName" "Smith"}
 ```
 
