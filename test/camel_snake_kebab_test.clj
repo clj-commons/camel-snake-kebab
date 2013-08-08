@@ -18,7 +18,8 @@
   (testing "examples"
     (is (= 'FluxCapacitor  (->CamelCase 'flux-capacitor)))
     (is (= "I_AM_CONSTANT" (->SNAKE_CASE "I am constant")))
-    (is (= :object-id      (->kebab-case :object_id))))
+    (is (= :object-id      (->kebab-case :object_id)))
+    (is (= "X-SSL-Cipher"  (->HTTP-Header-Case "x-ssl-cipher"))))
 
   (testing "all the combinations"
     (let
