@@ -1,16 +1,17 @@
 (ns camel-snake-kebab-test
   (:use clojure.test
-        camel-snake-kebab))
+        camel-snake-kebab)
+  (:require (clojure (string :refer [split]))))
 
-(def parse @#'camel-snake-kebab/parse)
+(defn separate-words [s] (split s @#'camel-snake-kebab/word-separator-pattern))
 
-(deftest parse-test
-  (is (= ["foo" "bar"] (parse "foo bar")))
-  (is (= ["foo" "bar"] (parse "foo-bar")))
-  (is (= ["foo" "Bar"] (parse "fooBar")))
-  (is (= ["Foo" "Bar"] (parse "FooBar")))
-  (is (= ["foo" "bar"] (parse "foo_bar")))
-  (is (= ["FOO" "BAR"] (parse "FOO_BAR"))))
+(deftest word-separator-pattern-test
+  (is (= ["foo" "bar"] (separate-words "foo bar")))
+  (is (= ["foo" "bar"] (separate-words "foo-bar")))
+  (is (= ["foo" "Bar"] (separate-words "fooBar")))
+  (is (= ["Foo" "Bar"] (separate-words "FooBar")))
+  (is (= ["foo" "bar"] (separate-words "foo_bar")))
+  (is (= ["FOO" "BAR"] (separate-words "FOO_BAR"))))
 
 (def zip (partial map vector))
 
