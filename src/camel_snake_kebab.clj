@@ -34,14 +34,9 @@
   "The formatting rules for each case."
   {"CamelCase" [capitalize capitalize ""]
    "Camel_Snake_Case" [capitalize capitalize "_"]
-   "Camel-Kebab-Case" [capitalize capitalize "-"]
    "camelCase" [lower-case capitalize ""]
-   "camel_Snake_Case" [lower-case capitalize "_"]
-   "camel-Kebab-Case" [lower-case capitalize "-"]
    "Snake_case" [capitalize lower-case "_"]
-   "Kebab-case" [capitalize lower-case "-"]
    "SNAKE_CASE" [upper-case upper-case "_"]
-   "KEBAB-CASE" [upper-case upper-case "-"]
    "snake_case" [lower-case lower-case "_"]
    "kebab-case" [lower-case lower-case "-"]
    "HTTP-Header-Case" [capitalize-http-header capitalize-http-header "-"]})
