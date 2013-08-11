@@ -25,7 +25,7 @@
     
     (is (= :object-id      (->kebab-case-keyword "object_id"))))
 
-  (testing "all the combinations"
+  (testing "all the type preserving functions"
     (let
       [inputs    ["FooBar"
                   "fooBar"
@@ -45,7 +45,12 @@
 
       (dorun
         (for [input inputs, format formats, [output function] (zip inputs functions)]
-          (is (= (format output) (function (format input)))))))))
+          (is (= (format output) (function (format input))))))))
+  
+  (testing "some of the type converting functions"
+    (is (= :FooBar (->CamelCaseKeyword 'foo-bar)))
+    (is (= "FOO_BAR" (->SNAKE_CASE_STRING :foo-bar)))
+    (is (= 'foo-bar (->kebab-case-symbol "foo bar")))))
 
 (deftest http-header-case-test
   (is (= "User-Agent"       (->HTTP-Header-Case "user-agent")))
