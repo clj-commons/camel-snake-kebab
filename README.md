@@ -25,7 +25,7 @@ A Clojure library to convert between different word case conventions.
 1. Add the following to your `project.clj` `:dependencies`:
 
   ```clojure
-  [camel-snake-kebab "0.1.1"]
+  [camel-snake-kebab "0.1.2-SNAPSHOT"]
   ```
 
 2. Add the following to your namespace declaration:
