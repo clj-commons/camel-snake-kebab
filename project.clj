@@ -1,4 +1,4 @@
-(defproject camel-snake-kebab "0.1.2-SNAPSHOT"
+(defproject camel-snake-kebab "0.1.2"
   :description "A library to convert between different word case conventions."
   :url "https://github.com/qerub/camel-snake-kebab"
   :license {:name "Eclipse Public License"

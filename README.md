@@ -32,7 +32,7 @@ There are also functions that convert the value type for you:
 1. Add the following to your `project.clj` `:dependencies`:
 
   ```clojure
-  [camel-snake-kebab "0.1.2-SNAPSHOT"]
+  [camel-snake-kebab "0.1.2"]
   ```
 
 2. Add the following to your namespace declaration:
