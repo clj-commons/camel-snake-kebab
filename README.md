@@ -95,6 +95,24 @@ Yeah, and then there are the type converting functions:
 ; => -120
 ```
 
+### With Memoization
+
+If you're going to do case conversion in a hot spot, use [core.memoize](https://github.com/clojure/core.memoize) to avoid doing the same conversions over and over again.
+
+```clojure
+(use 'clojure.core.memoize)
+(use 'criterium.core)
+
+(def memoized->kebab-case
+  (memo-fifo ->kebab-case 512))
+
+(quick-bench (->kebab-case "firstName"))
+; ... Execution time mean : 6,384971 µs ...
+
+(quick-bench (memoized->kebab-case "firstName"))
+; ... Execution time mean : 700,146806 ns ...
+```
+
 ## Further Reading
 
 * [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
