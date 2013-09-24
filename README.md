@@ -100,6 +100,11 @@ Yeah, and then there are the type converting functions:
 * [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
 * [Wikipedia about usage of letter case in computer programming](http://en.wikipedia.org/wiki/Letter_case#Computers)
 
+## Alternatives
+
+* [org.tobereplaced/lettercase](https://github.com/ToBeReplaced/lettercase)
+* [com.google.common.base.CaseFormat](http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/base/CaseFormat.html)
+
 ## License
 
 Copyright (C) 2012-2013 [Christoffer Sawicki](mailto:christoffer.sawicki@gmail.com) & ToBeReplaced
