@@ -90,8 +90,8 @@ Yeah, and then there are the type converting functions:
 ```clojure
 (->> (java.util.Date.)
      (bean)
-	 (map-keys ->kebab-case)
-	 :timezone-offset)
+     (map-keys ->kebab-case)
+     :timezone-offset)
 ; => -120
 ```
 
