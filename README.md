@@ -73,7 +73,21 @@ Yeah, and then there are the type converting functions:
     (into {} (map mapper m))))
 ```
 
-### With JSON Objects
+### With JSON
+
+```clojure
+(require '[clojure.data.json :as json])
+
+(json/read-str "{\"firstName\":\"John\",\"lastName\":\"Smith\"}" :key-fn ->kebab-case-keyword)
+; => {:first-name "John", :last-name "Smith"}
+
+; And back:
+
+(json/write-str {:first-name "John", :last-name "Smith"} :key-fn ->camelCaseString)
+; => "{\"firstName\":\"John\",\"lastName\":\"Smith\"}"
+```
+
+### With Plain Maps
 
 ```clojure
 (map-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
