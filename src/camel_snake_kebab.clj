@@ -1,15 +1,13 @@
 (ns camel-snake-kebab
-  (:require (clojure (string :refer [split join capitalize
-                                     lower-case upper-case])))
-  (:import (clojure.lang Keyword Symbol)))
+  (:require [clojure.string :refer [split join capitalize lower-case upper-case]])
+  (:import  (clojure.lang Keyword Symbol)))
 
 (def ^:private upper-case-http-headers
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})
 
-(defn- capitalize-http-header
-  [x]
-  (or (upper-case-http-headers (upper-case x))
-      (capitalize x)))
+(defn- capitalize-http-header [s]
+  (or (upper-case-http-headers (upper-case s))
+      (capitalize s)))
 
 (def ^:private word-separator-pattern
   "A pattern that matches all known word separators."
@@ -20,35 +18,33 @@
        (join "|")
        re-pattern))
 
-(defn- convert-case [first-fn rest-fn separator s]
-  "Converts the case of a string s according to the rule for the first
+(defn- convert-case [first-fn rest-fn sep s]
+  "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."
-  (-> s
-      (split word-separator-pattern)
-      ((fn [[word & more]]
-         (join separator (cons (first-fn word) (map rest-fn more)))))))
+  (let [[first & rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
 
 (def ^:private case-conversion-rules
   "The formatting rules for each case."
-  {"CamelCase" [capitalize capitalize ""]
+  {"CamelCase"        [capitalize capitalize "" ]
    "Camel_Snake_Case" [capitalize capitalize "_"]
-   "camelCase" [lower-case capitalize ""]
-   "Snake_case" [capitalize lower-case "_"]
-   "SNAKE_CASE" [upper-case upper-case "_"]
-   "snake_case" [lower-case lower-case "_"]
-   "kebab-case" [lower-case lower-case "-"]
+   "camelCase"        [lower-case capitalize "" ]
+   "Snake_case"       [capitalize lower-case "_"]
+   "SNAKE_CASE"       [upper-case upper-case "_"]
+   "snake_case"       [lower-case lower-case "_"]
+   "kebab-case"       [lower-case lower-case "-"]
    "HTTP-Header-Case" [capitalize-http-header capitalize-http-header "-"]})
 
 (defprotocol AlterName
   (alter-name [this f] "Alters the name of this with f."))
 
 (extend-protocol AlterName
-  String (alter-name [this f] (-> this f))
+  String  (alter-name [this f] (-> this f))
   Keyword (alter-name [this f] (-> this name f keyword))
-  Symbol (alter-name [this f] (-> this name f symbol)))
+  Symbol  (alter-name [this f] (-> this name f symbol)))
 
-(doseq [[case-label [first-fn rest-fn separator]] case-conversion-rules]
-  (let [case-converter (partial convert-case first-fn rest-fn separator)
+(doseq [[case-label [first-fn rest-fn sep]] case-conversion-rules]
+  (let [case-converter (partial convert-case first-fn rest-fn sep)
         symbol-creator (fn [type-label]
                          (->> [case-label type-label]
                               (join \space)
