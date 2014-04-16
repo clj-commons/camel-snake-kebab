@@ -5,7 +5,7 @@
 (def ^:private upper-case-http-headers
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})
 
-(defn- capitalize-http-header [s]
+(defn ^:private capitalize-http-header [s]
   (or (upper-case-http-headers (upper-case s))
       (capitalize s)))
 
@@ -18,7 +18,7 @@
        (join "|")
        re-pattern))
 
-(defn- convert-case [first-fn rest-fn sep s]
+(defn ^:private convert-case [first-fn rest-fn sep s]
   "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."
   (let [[first & rest] (split s word-separator-pattern)]
