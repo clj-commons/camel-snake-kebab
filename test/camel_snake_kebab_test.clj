@@ -3,27 +3,27 @@
         camel-snake-kebab)
   (:require (clojure (string :refer [split]))))
 
-(defn separate-words [s] (split s @#'camel-snake-kebab/word-separator-pattern))
-
 (deftest word-separator-pattern-test
-  (is (= ["foo" "bar"] (separate-words "foo bar")))
-  (is (= ["foo" "bar"] (separate-words "foo\n\tbar")))
-  (is (= ["foo" "bar"] (separate-words "foo-bar")))
-  (is (= ["foo" "Bar"] (separate-words "fooBar")))
-  (is (= ["Foo" "Bar"] (separate-words "FooBar")))
-  (is (= ["foo" "bar"] (separate-words "foo_bar")))
-  (is (= ["FOO" "BAR"] (separate-words "FOO_BAR"))))
+  (are [x y] (= x (split y @#'camel-snake-kebab/word-separator-pattern))
+    ["foo" "bar"] "foo bar"
+    ["foo" "bar"] "foo\n\tbar"
+    ["foo" "bar"] "foo-bar"
+    ["foo" "Bar"] "fooBar"
+    ["Foo" "Bar"] "FooBar"
+    ["foo" "bar"] "foo_bar"
+    ["FOO" "BAR"] "FOO_BAR"))
 
 (def zip (partial map vector))
 
 (deftest format-case-test
   (testing "examples"
-    (is (= 'FluxCapacitor  (->CamelCase 'flux-capacitor)))
-    (is (= "I_AM_CONSTANT" (->SNAKE_CASE "I am constant")))
-    (is (= :object-id      (->kebab-case :object_id)))
-    (is (= "X-SSL-Cipher"  (->HTTP-Header-Case "x-ssl-cipher")))
-    
-    (is (= :object-id      (->kebab-case-keyword "object_id"))))
+    (are [x y] (= x y)
+      'FluxCapacitor  (->CamelCase 'flux-capacitor)
+      "I_AM_CONSTANT" (->SNAKE_CASE "I am constant")
+      :object-id      (->kebab-case :object_id)
+      "X-SSL-Cipher"  (->HTTP-Header-Case "x-ssl-cipher")
+
+      :object-id      (->kebab-case-keyword "object_id")))
 
   (testing "all the type preserving functions"
     (let
@@ -48,16 +48,18 @@
           (is (= (format output) (function (format input))))))))
   
   (testing "some of the type converting functions"
-    (is (= :FooBar (->CamelCaseKeyword 'foo-bar)))
-    (is (= "FOO_BAR" (->SNAKE_CASE_STRING :foo-bar)))
-    (is (= 'foo-bar (->kebab-case-symbol "foo bar")))))
+    (are [x y] (= x y)
+      :FooBar   (->CamelCaseKeyword  'foo-bar)
+      "FOO_BAR" (->SNAKE_CASE_STRING :foo-bar)
+      'foo-bar  (->kebab-case-symbol "foo bar"))))
 
 (deftest http-header-case-test
-  (is (= "User-Agent"       (->HTTP-Header-Case "user-agent")))
-  (is (= "DNT"              (->HTTP-Header-Case "dnt")))
-  (is (= "Remote-IP"        (->HTTP-Header-Case "remote-ip")))
-  (is (= "TE"               (->HTTP-Header-Case "te")))
-  (is (= "UA-CPU"           (->HTTP-Header-Case "ua-cpu")))
-  (is (= "X-SSL-Cipher"     (->HTTP-Header-Case "x-ssl-cipher")))
-  (is (= "X-WAP-Profile"    (->HTTP-Header-Case "x-wap-profile")))
-  (is (= "X-XSS-Protection" (->HTTP-Header-Case "x-xss-protection"))))
+  (are [x y] (= x (->HTTP-Header-Case y))
+    "User-Agent"       "user-agent"
+    "DNT"              "dnt"
+    "Remote-IP"        "remote-ip"
+    "TE"               "te"
+    "UA-CPU"           "ua-cpu"
+    "X-SSL-Cipher"     "x-ssl-cipher"
+    "X-WAP-Profile"    "x-wap-profile"
+    "X-XSS-Protection" "x-xss-protection"))
