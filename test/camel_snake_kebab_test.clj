@@ -48,9 +48,8 @@
                   ->Camel_Snake_Case]
        formats   [identity keyword symbol]]
 
-      (dorun
-        (for [input inputs, format formats, [output function] (zip inputs functions)]
-          (is (= (format output) (function (format input))))))))
+      (doseq [input inputs, format formats, [output function] (zip inputs functions)]
+        (is (= (format output) (function (format input)))))))
   
   (testing "some of the type converting functions"
     (are [x y] (= x y)
