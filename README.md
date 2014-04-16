@@ -65,6 +65,10 @@ Yeah, and then there are the type converting functions:
 * `->Camel_Snake_Case_{Keyword, String, Symbol}`
 * `->HTTP-Header-Case-{Keyword, String, Symbol}`
 
+## Notes
+
+Namespaced keywords and symbols will be rejected with an exception.
+
 ## Serving Suggestions
 
 ```clojure

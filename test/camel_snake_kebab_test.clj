@@ -1,7 +1,8 @@
 (ns camel-snake-kebab-test
   (:use clojure.test
         camel-snake-kebab)
-  (:require [clojure.string :refer [split]]))
+  (:require [clojure.string :refer [split]])
+  (:import (clojure.lang ExceptionInfo)))
 
 (deftest word-separator-pattern-test
   (are [x y] (= x (split y @#'camel-snake-kebab/word-separator-pattern))
@@ -24,6 +25,10 @@
       "X-SSL-Cipher"  (->HTTP-Header-Case "x-ssl-cipher")
 
       :object-id      (->kebab-case-keyword "object_id")))
+
+  (testing "rejection of namespaced keywords and symbols"
+    (is (thrown? ExceptionInfo (->CamelCase (keyword "a" "b"))))
+    (is (thrown? ExceptionInfo (->CamelCase (symbol  "a" "b")))))
 
   (testing "all the type preserving functions"
     (let

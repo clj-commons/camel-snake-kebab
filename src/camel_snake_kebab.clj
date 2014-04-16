@@ -39,9 +39,16 @@
   (alter-name [this f] "Alters the name of this with f."))
 
 (extend-protocol AlterName
-  String  (alter-name [this f] (-> this f))
-  Keyword (alter-name [this f] (-> this name f keyword))
-  Symbol  (alter-name [this f] (-> this name f symbol)))
+  String  (alter-name [this f]
+            (-> this f))
+  Keyword (alter-name [this f]
+            (if (namespace this)
+              (throw (ex-info "Namespaced keywords are not supported" {:input this}))
+              (-> this name f keyword)))
+  Symbol  (alter-name [this f]
+            (if (namespace this)
+              (throw (ex-info "Namespaced symbols are not supported" {:input this}))
+              (-> this name f symbol))))
 
 (doseq [[case-label [first-fn rest-fn sep]] case-conversion-rules]
   (let [case-converter (partial convert-case first-fn rest-fn sep)
