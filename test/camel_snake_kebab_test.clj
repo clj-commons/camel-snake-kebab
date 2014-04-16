@@ -1,7 +1,7 @@
 (ns camel-snake-kebab-test
   (:use clojure.test
         camel-snake-kebab)
-  (:require (clojure (string :refer [split]))))
+  (:require [clojure.string :refer [split]]))
 
 (deftest word-separator-pattern-test
   (are [x y] (= x (split y @#'camel-snake-kebab/word-separator-pattern))
