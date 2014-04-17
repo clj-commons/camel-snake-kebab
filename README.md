@@ -1,6 +1,6 @@
 # Camel_SNAKE-kebab
 
-A Clojure library to convert between different word case conventions.
+A Clojure library for word case conversions.
 
 ## Examples
 
