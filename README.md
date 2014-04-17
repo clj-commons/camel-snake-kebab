@@ -54,7 +54,7 @@ There are also functions that convert the value type for you:
 
 You should be able to figure out all what all of them do.
 
-Yeah, and then there are the type converting functions:
+Yeah, and then there are the type-converting functions:
 
 * `->CamelCase{Keyword, String, Symbol}`
 * `->camelCase{Keyword, String, Symbol}`
