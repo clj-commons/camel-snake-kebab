@@ -51,21 +51,18 @@
               (-> this name f symbol))))
 
 (doseq [[case-label [first-fn rest-fn sep]] case-conversion-rules]
-  (let [case-converter (partial convert-case first-fn rest-fn sep)
-        symbol-creator (fn [type-label]
-                         (->> [case-label type-label]
-                              (join \space)
-                              case-converter
-                              (format "->%s")
-                              symbol))]
-    ;; Create the type-preserving functions.
+  (letfn [(convert-case* [s] (convert-case first-fn rest-fn sep s))
+          (make-name [type-label] (->> [case-label type-label]
+                                       (join \space)
+                                       (convert-case*)
+                                       (format "->%s")
+                                       (symbol)))]
+    ;; The type-preserving function
     (intern *ns*
             (->> case-label (format "->%s") symbol)
-            #(alter-name % case-converter))
-    ;; Create the string-returning functions.
-    (intern *ns* (symbol-creator "string") (comp case-converter name))
-    (doseq [[type-label type-converter] {"symbol" symbol "keyword" keyword}]
-      ;; Create the symbol- and keyword-returning.
+            #(alter-name % convert-case*))
+    ;; The type-converting functions
+    (doseq [[type-label type-converter] {"string" identity "symbol" symbol "keyword" keyword}]
       (intern *ns*
-              (symbol-creator type-label)
-              (comp type-converter case-converter name)))))
+              (make-name type-label)
+              (comp type-converter convert-case* name)))))
