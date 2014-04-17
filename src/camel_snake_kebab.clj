@@ -18,7 +18,7 @@
        (join "|")
        re-pattern))
 
-(defn ^:private convert-case [first-fn rest-fn sep s]
+(defn convert-case [first-fn rest-fn sep s]
   "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."
   (let [[first & rest] (split s word-separator-pattern)]
