@@ -33,7 +33,8 @@
    "SNAKE_CASE"       [upper-case upper-case "_"]
    "snake_case"       [lower-case lower-case "_"]
    "kebab-case"       [lower-case lower-case "-"]
-   "HTTP-Header-Case" [capitalize-http-header capitalize-http-header "-"]})
+   "HTTP-Header-Case" [capitalize-http-header capitalize-http-header "-"]
+   "CamelCaseWithSpace" [capitalize capitalize " "]})
 
 (defprotocol AlterName
   (alter-name [this f] "Alters the name of this with f."))
