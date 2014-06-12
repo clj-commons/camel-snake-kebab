@@ -38,7 +38,7 @@ There are also functions that convert the value type for you:
 2. Add the following to your namespace declaration:
 
   ```clojure
-  :use camel-snake-kebab
+  :require [camel-snake-kebab :refer :all]
   ```
 
 ## Available Conversion Functions
