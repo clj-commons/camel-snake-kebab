@@ -1,4 +1,4 @@
-(defproject camel-snake-kebab "0.1.5"
+(defproject camel-snake-kebab "0.1.6-SNAPSHOT"
   :description "A library for word case conversions."
   :url "https://github.com/qerub/camel-snake-kebab"
   :license {:name "Eclipse Public License"
@@ -6,7 +6,7 @@
   :scm {:name "git"
         :url "https://github.com/qerub/camel-snake-kebab"}
 
-  :dependencies [[org.clojure/clojure  "1.6.0"]
+  :dependencies [[org.clojure/clojure  "1.5.1"]
                  [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
 
   :plugins [[com.keminglabs/cljx "0.4.0"]
