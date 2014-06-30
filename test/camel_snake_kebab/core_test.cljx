@@ -6,8 +6,8 @@
   #+clj  (:import (clojure.lang ExceptionInfo)))
 
 #+clj
-(deftest split-to-words-test
-  (are [x y] (= x (@#'camel-snake-kebab.case-convert/split-to-words y))
+(deftest split-test
+  (are [x y] (= x (@#'camel-snake-kebab.case-convert/split y))
     ["foo" "bar"] "foo bar"
     ["foo" "bar"] "foo\n\tbar"
     ["foo" "bar"] "foo-bar"

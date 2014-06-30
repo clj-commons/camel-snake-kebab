@@ -35,7 +35,7 @@
   {:builds
    [{:source-paths ["target/classes" "target/generated-test"]
      :compiler {:output-to "target/testable.js"
-                :source-map "target/testable.js.map"
+;;              :source-map "target/testable.js.map"
                 :optimizations :simple}}]
    :test-commands {"unit-tests" ["phantomjs" :runner
                                  "target/testable.js"]}}

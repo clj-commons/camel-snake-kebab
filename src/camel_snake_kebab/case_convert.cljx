@@ -1,57 +1,45 @@
 (ns camel-snake-kebab.case-convert
-  (:require [clojure.string :refer [join split upper-case capitalize replace]]))
+  (:require [clojure.string :refer [join upper-case capitalize]]))
 
-(def ^:private word-boundary-pattern
-  (->> ["(\\b)[-_\\s]+(\\b)"
-        "([a-z])([A-Z])"
-        "([A-Z])([A-Z][a-z])"
-        "([a-z][A-Z])([A-Z])"
-        "(?=[A-Z])([A-Z][a-z])"
-        "([A-Za-z])(\\d)"
-        "(\\d)([A-Za-z])"]
-       (join "|")
-       re-pattern))
+(defn ^:private classify-char [c]
+  (case c
+    (\0 \1 \2 \3 \4 \5 \6 \7 \8 \9) :number
+    (\- \_ \space \tab \newline \o013 \formfeed \return) :whitespace
+    (\a \b \c \d \e \f \g \h \i \j \k \l \m \n \o \p \q \r \s \t \u \v \w \x \y) :lower
+    (\A \B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y) :upper
+    :other))
 
-#+clj
-(defn mark-boundary
-  "Handle word boundary replacement."
-  [matches]
-  (->>
-   (rest matches)
-   (filter identity)
-   (join "_")))
-
-#+cljs
-(defn mark-boundary
-  "Handle word boundary replacement."
-  [& matches] ;; cljs replace func uses var arguments rather than a single vector arg in the clojure equivilent
-  (->>
-   (rest matches)
-   (drop-last 2) ;; clojurescript replacement func adds the string offset and whole string as the last 2 arguments - don't need these
-   (filter identity)
-   (join "_")))
-
-(defn- mark-word-boundaries
-  "Mark the word boundaries in a string with an underscore. Parsed twice to pick up overlapping boundaries (single letter/number words)"
-  [s]
-  (-> s
-      ;; pass a second time to pick up overlapped word boundaries.
-      ;; Lookarounds would be nicer, but clojurescript (js) doesn't support lookbehinds
-      (replace word-boundary-pattern mark-boundary)
-      (replace word-boundary-pattern mark-boundary)))
-
-(defn- split-to-words
-  "Split the string into a vector of words"
-  [s]
-  (->
-   s
-   mark-word-boundaries
-   (split #"_")))
+(defn ^:private split [ss]
+  (let [cs (mapv classify-char ss)]
+    (loop [result [], start 0, i 0]
+      (let [i+1 (+ i 1)
+            result+new
+            (fn [end]
+              (if (> end start)
+                (conj result (.substring ^String ss start end))
+                result))]
+        (cond (>= i (count ss))
+              (result+new i)
+              
+              (= (nth cs i) :whitespace)
+              (recur (result+new i) i+1 i+1)
+              
+              (let [[a b c] (subvec cs i)]
+                ;; This expression is not pretty,
+                ;; but it compiles down to sane JavaScript.
+                (or (and (=    a :lower)  (=    b :upper))
+                    (and (not= a :number) (=    b :number))
+                    (and (=    a :number) (not= b :number))
+                    (and (=    a :upper)  (=    b :upper)  (= c :lower))))
+              (recur (result+new i+1) i+1 i+1)
+              
+              :else
+              (recur result start i+1))))))
 
 (defn convert-case [first-fn rest-fn sep s]
   "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."
-  (let [[first & rest] (split-to-words s)]
+  (let [[first & rest] (split s)]
     (join sep (cons (first-fn first) (map rest-fn rest)))))
 
 (def ^:private upper-case-http-headers
