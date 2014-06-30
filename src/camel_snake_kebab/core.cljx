@@ -2,20 +2,31 @@
   (:require [clojure.string]
             [camel-snake-kebab.case-convert]
             #+clj [camel-snake-kebab.macros :refer [gen-conversion-fns]])
+  #+clj  (:import (clojure.lang Keyword Symbol))
   #+cljs (:require-macros [camel-snake-kebab.macros :refer [gen-conversion-fns]]))
 
-(defn alter-name
-  "Alters the name of this with f."
-  [this f]
-  (cond
-   (string? this) (-> this f)
-   (keyword? this) (if (namespace this)
-                     (throw (ex-info "Namespaced keywords are not supported" {:input this}))
-                     (-> this name f keyword))
-   (symbol? this) (if (namespace this)
-                    (throw (ex-info "Namespaced symbols are not supported" {:input this}))
-                    (-> this name f symbol))
-   :else this))
+(defprotocol AlterName
+  (alter-name [this f] "Alters the name of this with f."))
+
+(extend-protocol AlterName
+  #+clj
+  String
+  #+cljs
+  string
+  (alter-name [this f]
+    (-> this f))
+
+  Keyword
+  (alter-name [this f]
+    (if (namespace this)
+      (throw (ex-info "Namespaced keywords are not supported" {:input this}))
+      (-> this name f keyword)))
+
+  Symbol
+  (alter-name [this f]
+    (if (namespace this)
+      (throw (ex-info "Namespaced symbols are not supported" {:input this}))
+      (-> this name f symbol))))
 
 ;; These are fully qualified to workaround some issue with ClojureScript:
 
