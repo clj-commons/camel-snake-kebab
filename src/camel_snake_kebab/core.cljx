@@ -17,6 +17,7 @@
                     (-> this name f symbol))
    :else this))
 
+;; These are fully qualified to workaround some issue with ClojureScript:
 
 (gen-conversion-fns {"CamelCase"        [clojure.string/capitalize clojure.string/capitalize "" ]
                      "Camel_Snake_Case" [clojure.string/capitalize clojure.string/capitalize "_"]
