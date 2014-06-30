@@ -7,6 +7,7 @@
         :url "https://github.com/qerub/camel-snake-kebab"}
 
   :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.clojure/core.match "0.2.1"]
                  [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
 
   :plugins [[com.keminglabs/cljx "0.4.0"]

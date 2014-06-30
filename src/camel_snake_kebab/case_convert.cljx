@@ -1,5 +1,8 @@
 (ns camel-snake-kebab.case-convert
-  (:require [clojure.string :refer [join upper-case capitalize]]))
+  (:require [clojure.string :refer [join upper-case capitalize]]
+            #+clj  [clojure.core.match :refer [match]]
+            #+cljs [cljs.core.match])
+  #+cljs (:require-macros [cljs.core.match.macros :refer [match]]))
 
 (defn ^:private classify-char [c]
   (case c
@@ -18,23 +21,23 @@
               (if (> end start)
                 (conj result (.substring ^String ss start end))
                 result))]
-        (cond (>= i (count ss))
-              (result+new i)
-              
-              (= (nth cs i) :whitespace)
-              (recur (result+new i) i+1 i+1)
-              
-              (let [[a b c] (subvec cs i)]
-                ;; This expression is not pretty,
-                ;; but it compiles down to sane JavaScript.
-                (or (and (=    a :lower)  (=    b :upper))
-                    (and (not= a :number) (=    b :number))
-                    (and (=    a :number) (not= b :number))
-                    (and (=    a :upper)  (=    b :upper)  (= c :lower))))
-              (recur (result+new i+1) i+1 i+1)
-              
-              :else
-              (recur result start i+1))))))
+        (if (< i (count ss))
+          (let [[m0 m1 m2]
+                (match [(subvec cs i)]
+                  [[:whitespace & _]]
+                  [(result+new i) i+1 i+1]
+
+                  [(:or [:lower :upper                        & _]
+                        [:upper :upper :lower                 & _]
+                        ;; (:not _) patterns would be nice below!
+                        [:number (_ :guard #(not= % :number)) & _]
+                        [(_ :guard #(not= % :number)) :number & _])]
+                  [(result+new i+1) i+1 i+1]
+
+                  :else
+                  [result start i+1])]
+            (recur m0 m1 m2)) ;; To avoid `recur` inside of `match`
+          (result+new i))))))
 
 (defn convert-case [first-fn rest-fn sep s]
   "Converts the case of a string according to the rule for the first
