@@ -2,7 +2,7 @@
   (:require [clojure.string :refer [join split upper-case capitalize replace]]))
 
 (def ^:private word-boundary-pattern
-  (->> ["(\\b)[-_\\s](\\b)"
+  (->> ["(\\b)[-_\\s]+(\\b)"
         "([a-z])([A-Z])"
         "([A-Z])([A-Z][a-z])"
         "([a-z][A-Z])([A-Z])"

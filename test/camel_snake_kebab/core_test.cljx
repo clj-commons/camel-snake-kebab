@@ -5,6 +5,17 @@
   #+cljs (:require-macros [cemerick.cljs.test :refer [deftest is testing are]])
   #+clj  (:import (clojure.lang ExceptionInfo)))
 
+#+clj
+(deftest split-to-words-test
+  (are [x y] (= x (@#'camel-snake-kebab.case-convert/split-to-words y))
+    ["foo" "bar"] "foo bar"
+    ["foo" "bar"] "foo\n\tbar"
+    ["foo" "bar"] "foo-bar"
+    ["foo" "Bar"] "fooBar"
+    ["Foo" "Bar"] "FooBar"
+    ["foo" "bar"] "foo_bar"
+    ["FOO" "BAR"] "FOO_BAR"))
+
 (def zip (partial map vector))
 
 (deftest format-case-test
