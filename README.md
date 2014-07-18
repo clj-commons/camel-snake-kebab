@@ -2,6 +2,16 @@
 
 A Clojure library for word case conversions.
 
+## News
+
+### 0.2.0-SNAPSHOT
+
+* Supports ClojureScript!
+* Requires Clojure 1.5.1 or later.
+* Has new regex-free internals.
+* Handles non-ASCII chars better.
+* **Breaking change:** The namespace `camel-snake-kebab` has been renamed to `camel-snake-kebab.core`.
+
 ## Examples
 
 ```clojure
