@@ -1,5 +1,6 @@
 (ns camel-snake-kebab.core-test
   (:require [camel-snake-kebab.core :as csk]
+            [camel-snake-kebab.internals.misc :refer [split]]
             #+clj  [clojure.test :refer :all]
             #+cljs [cemerick.cljs.test :as t])
   #+cljs (:require-macros [cemerick.cljs.test :refer [deftest is testing are]])
@@ -7,7 +8,7 @@
 
 #+clj
 (deftest split-test
-  (are [x y] (= x (@#'camel-snake-kebab.internals.misc/split y))
+  (are [x y] (= x (split y))
     ["foo" "bar"] "foo bar"
     ["foo" "bar"] "foo\n\tbar"
     ["foo" "bar"] "foo-bar"

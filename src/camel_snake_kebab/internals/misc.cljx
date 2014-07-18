@@ -1,7 +1,7 @@
 (ns camel-snake-kebab.internals.misc
   (:require [clojure.string :refer [join upper-case capitalize]]))
 
-(defn ^:private classify-char [c]
+(defn classify-char [c]
   (case c
     (\0 \1 \2 \3 \4 \5 \6 \7 \8 \9) :number
     (\- \_ \space \tab \newline \o013 \formfeed \return) :whitespace
@@ -9,7 +9,7 @@
     (\A \B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y) :upper
     :other))
 
-(defn ^:private split [ss]
+(defn split [ss]
   (let [cs (mapv classify-char ss)]
     (loop [result [], start 0, current 0]
       (let [next (+ current 1)
@@ -40,7 +40,7 @@
   (let [[first & rest] (split s)]
     (join sep (cons (first-fn first) (map rest-fn rest)))))
 
-(def ^:private upper-case-http-headers
+(def upper-case-http-headers
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})
 
 (defn capitalize-http-header [s]
