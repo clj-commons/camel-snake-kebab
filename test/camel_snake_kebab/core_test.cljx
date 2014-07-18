@@ -23,7 +23,7 @@
     ["Adler" "32"]         "Adler32"
     ["Inet" "4" "Address"] "Inet4Address"
     ["Arc" "2" "D"]        "Arc2D"
-    ["a" "123" "b"]        "a123b"
+    ["a" "123b"]           "a123b"
     ["A" "123" "B"]        "A123B"))
 
 (def zip (partial map vector))

@@ -27,10 +27,9 @@
               (let [[a b c] (subvec cs i)]
                 ;; This expression is not pretty,
                 ;; but it compiles down to sane JavaScript.
-                (or (and (=    a :lower)  (=    b :upper))
-                    (and (not= a :number) (=    b :number))
-                    (and (=    a :number) (not= b :number))
-                    (and (=    a :upper)  (=    b :upper)  (= c :lower))))
+                (or (and (not= a :upper)  (= b :upper))
+                    (and (not= a :number) (= b :number))
+                    (and (= a :upper) (= b :upper) (= c :lower))))
               (recur (result+new i+1) i+1 i+1)
               
               :else
