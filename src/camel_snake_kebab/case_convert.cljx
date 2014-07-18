@@ -11,29 +11,28 @@
 
 (defn ^:private split [ss]
   (let [cs (mapv classify-char ss)]
-    (loop [result [], start 0, i 0]
-      (let [i+1 (+ i 1)
-            result+new
-            (fn [end]
-              (if (> end start)
-                (conj result (.substring ^String ss start end))
-                result))]
-        (cond (>= i (count ss))
-              (result+new i)
+    (loop [result [], start 0, current 0]
+      (let [next (+ current 1)
+            result+new (fn [end]
+                         (if (> end start)
+                           (conj result (.substring ^String ss start end))
+                           result))]
+        (cond (>= current (count ss))
+              (result+new current)
               
-              (= (nth cs i) :whitespace)
-              (recur (result+new i) i+1 i+1)
+              (= (nth cs current) :whitespace)
+              (recur (result+new current) next next)
               
-              (let [[a b c] (subvec cs i)]
+              (let [[a b c] (subvec cs current)]
                 ;; This expression is not pretty,
                 ;; but it compiles down to sane JavaScript.
                 (or (and (not= a :upper)  (= b :upper))
                     (and (not= a :number) (= b :number))
                     (and (= a :upper) (= b :upper) (= c :lower))))
-              (recur (result+new i+1) i+1 i+1)
+              (recur (result+new next) next next)
               
               :else
-              (recur result start i+1))))))
+              (recur result start next))))))
 
 (defn convert-case [first-fn rest-fn sep s]
   "Converts the case of a string according to the rule for the first
