@@ -1,6 +1,6 @@
-(ns camel-snake-kebab.macros
+(ns camel-snake-kebab.internals.macros
   (:require [clojure.string :refer [join]]
-            [camel-snake-kebab.case-convert :refer [convert-case]]))
+            [camel-snake-kebab.internals.case-convert :refer [convert-case]]))
 
 (defn ^:private type-preserving-function [case-label first-fn rest-fn sep]
   `(let [convert-case# (partial convert-case ~first-fn ~rest-fn ~sep)]

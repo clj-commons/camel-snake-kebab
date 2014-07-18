@@ -7,7 +7,7 @@
 
 #+clj
 (deftest split-test
-  (are [x y] (= x (@#'camel-snake-kebab.case-convert/split y))
+  (are [x y] (= x (@#'camel-snake-kebab.internals.case-convert/split y))
     ["foo" "bar"] "foo bar"
     ["foo" "bar"] "foo\n\tbar"
     ["foo" "bar"] "foo-bar"

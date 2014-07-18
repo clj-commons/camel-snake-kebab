@@ -1,4 +1,4 @@
-(ns camel-snake-kebab.case-convert
+(ns camel-snake-kebab.internals.case-convert
   (:require [clojure.string :refer [join upper-case capitalize]]))
 
 (defn ^:private classify-char [c]

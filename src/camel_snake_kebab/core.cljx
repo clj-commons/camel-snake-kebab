@@ -1,9 +1,9 @@
 (ns camel-snake-kebab.core
   (:require [clojure.string]
-            [camel-snake-kebab.case-convert]
-            #+clj [camel-snake-kebab.macros :refer [defconversion]])
+            [camel-snake-kebab.internals.case-convert]
+            #+clj [camel-snake-kebab.internals.macros :refer [defconversion]])
   #+clj  (:import (clojure.lang Keyword Symbol))
-  #+cljs (:require-macros [camel-snake-kebab.macros :refer [defconversion]]))
+  #+cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]]))
 
 (defprotocol AlterName
   (alter-name [this f] "Alters the name of this with f."))
@@ -37,4 +37,4 @@
 (defconversion "SNAKE_CASE"       clojure.string/upper-case clojure.string/upper-case "_")
 (defconversion "snake_case"       clojure.string/lower-case clojure.string/lower-case "_")
 (defconversion "kebab-case"       clojure.string/lower-case clojure.string/lower-case "-")
-(defconversion "HTTP-Header-Case" camel-snake-kebab.case-convert/capitalize-http-header camel-snake-kebab.case-convert/capitalize-http-header "-")
+(defconversion "HTTP-Header-Case" camel-snake-kebab.internals.case-convert/capitalize-http-header camel-snake-kebab.internals.case-convert/capitalize-http-header "-")
