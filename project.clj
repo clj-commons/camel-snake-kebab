@@ -37,7 +37,7 @@
      :compiler {:output-to "target/testable.js"
 ;;              :source-map "target/testable.js.map"
                 :optimizations :simple}}]
-   :test-commands {"unit-tests" ["phantomjs" :runner
+   :test-commands {"unit-tests" ["node" :node-runner
                                  "target/testable.js"]}}
 
   :aliases
