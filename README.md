@@ -4,7 +4,7 @@ A Clojure library for word case conversions.
 
 ## News
 
-### 0.2.0-SNAPSHOT
+### 2014-07-28: 0.2.0
 
 * Supports ClojureScript!
 * Requires Clojure 1.5.1 or later.
@@ -42,7 +42,7 @@ There are also functions that convert the value type for you:
 1. Add the following to your `project.clj` `:dependencies`:
 
   ```clojure
-  [camel-snake-kebab "0.2.0-SNAPSHOT"]
+  [camel-snake-kebab "0.2.0"]
   ```
 
 2. Add the following to your namespace declaration:
