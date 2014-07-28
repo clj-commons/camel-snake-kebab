@@ -12,7 +12,7 @@
 (defn split [ss]
   (let [cs (mapv classify-char ss)]
     (loop [result [], start 0, current 0]
-      (let [next (+ current 1)
+      (let [next (inc current)
             result+new (fn [end]
                          (if (> end start)
                            (conj result (.substring ^String ss start end))
