@@ -1,4 +1,4 @@
-(defproject camel-snake-kebab "0.2.1"
+(defproject camel-snake-kebab "0.2.2-SNAPSHOT"
   :description "A library for word case conversions."
   :url "https://github.com/qerub/camel-snake-kebab"
   :license {:name "Eclipse Public License"
