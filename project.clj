@@ -19,6 +19,8 @@
 
   :test-paths ["test" "target/generated-test"]
 
+  :hooks [cljx.hooks]
+
   :cljx {:builds [{:source-paths ["src"]
                    :output-path "target/classes"
                    :rules :clj}
@@ -41,4 +43,4 @@
                                  "target/testable.js"]}}
 
   :aliases
-  {"test-all" ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]})
+  {"test-all" ["do" "test," "cljsbuild" "test"]})
