@@ -15,7 +15,7 @@ A Clojure library for word case conversions.
 ## Examples
 
 ```clojure
-(use 'camel-snake-kebab)
+(use 'camel-snake-kebab.core)
 
 (->CamelCase 'flux-capacitor)
 ; => 'FluxCapacitor
@@ -48,7 +48,7 @@ There are also functions that convert the value type for you:
 2. Add the following to your namespace declaration:
 
   ```clojure
-  :require [camel-snake-kebab :refer :all]
+  :require [camel-snake-kebab.core :refer :all]
   ```
 
 ## Available Conversion Functions
