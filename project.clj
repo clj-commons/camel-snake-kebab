@@ -6,20 +6,20 @@
   :scm {:name "git"
         :url "https://github.com/qerub/camel-snake-kebab"}
 
-  :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
+  :dependencies []
 
-  :plugins [[com.keminglabs/cljx "0.4.0"]
-            [com.cemerick/clojurescript.test "0.3.1"]
-            [lein-cljsbuild "1.0.3"]]
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
+                                  [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
+                   :hooks [cljx.hooks]
+                   :plugins [[com.keminglabs/cljx "0.4.0"]
+                             [com.cemerick/clojurescript.test "0.3.1"]
+                             [lein-cljsbuild "1.0.3"]]}}
 
   :jar-exclusions [#"\.cljx"]
 
   :source-paths ["src" "target/classes"]
 
   :test-paths ["test" "target/generated-test"]
-
-  :hooks [cljx.hooks]
 
   :cljx {:builds [{:source-paths ["src"]
                    :output-path "target/classes"
