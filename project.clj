@@ -17,15 +17,15 @@
 
   :jar-exclusions [#"\.cljx"]
 
-  :source-paths ["src" "target/classes"]
+  :source-paths ["src" "target/generated-src"]
 
   :test-paths ["test" "target/generated-test"]
 
   :cljx {:builds [{:source-paths ["src"]
-                   :output-path "target/classes"
+                   :output-path "target/generated-src"
                    :rules :clj}
                   {:source-paths ["src"]
-                   :output-path "target/classes"
+                   :output-path "target/generated-src"
                    :rules :cljs}
                   {:source-paths ["test"]
                    :output-path "target/generated-test"
@@ -34,7 +34,7 @@
                    :output-path "target/generated-test"
                    :rules :cljs}]}
 
-  :cljsbuild {:builds [{:source-paths ["target/classes" "target/generated-test"]
+  :cljsbuild {:builds [{:source-paths ["target/generated-src" "target/generated-test"]
                         :compiler {:output-to "target/testable.js" :optimizations :simple}}]
               :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
 
