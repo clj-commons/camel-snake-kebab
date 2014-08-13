@@ -33,14 +33,9 @@
                   {:source-paths ["test"]
                    :output-path "target/generated-test"
                    :rules :cljs}]}
-  :cljsbuild
-  {:builds
-   [{:source-paths ["target/classes" "target/generated-test"]
-     :compiler {:output-to "target/testable.js"
-;;              :source-map "target/testable.js.map"
-                :optimizations :simple}}]
-   :test-commands {"unit-tests" ["node" :node-runner
-                                 "target/testable.js"]}}
 
-  :aliases
-  {"test-all" ["do" "test," "cljsbuild" "test"]})
+  :cljsbuild {:builds [{:source-paths ["target/classes" "target/generated-test"]
+                        :compiler {:output-to "target/testable.js" :optimizations :simple}}]
+              :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
+
+  :aliases {"test-all" ["do" "test," "cljsbuild" "test"]})
