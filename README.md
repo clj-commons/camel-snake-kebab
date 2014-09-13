@@ -74,7 +74,12 @@ Yeah, and then there are the type-converting functions:
 
 ## Notes
 
-Namespaced keywords and symbols will be rejected with an exception.
+* Namespaced keywords and symbols will be rejected with an exception.
+
+* This library has function names that only differ in case and will not work if you AOT compile it to a
+  case-insensitive filesystem (on e.g. Windows and OS X). `lein ring uberwar` always uses AOT and is therefore not
+  compatible with this library on these systems. See [#15](https://github.com/qerub/camel-snake-kebab/issues/15) and
+  [lein-ring#120](https://github.com/weavejester/lein-ring/issues/120) for details.
 
 ## Serving Suggestions
 
