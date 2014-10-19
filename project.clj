@@ -15,9 +15,6 @@
                              [com.cemerick/clojurescript.test "0.3.1"]
                              [lein-cljsbuild "1.0.3"]]}}
 
-  :lein-release {:tag-name ~(fn [project version] (str "version-" version))
-                 :sign-tags true}
-
   :jar-exclusions [#"\.cljx"]
 
   :source-paths ["src" "target/generated-src"]
