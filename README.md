@@ -7,7 +7,6 @@ A Clojure library for word case conversions.
 ### 2014-07-28: 0.2.0
 
 * Supports ClojureScript!
-* Requires Clojure 1.5.1 or later.
 * Has new regex-free internals.
 * Handles non-ASCII chars better.
 * **Breaking change:** The namespace `camel-snake-kebab` has been renamed to `camel-snake-kebab.core`.
@@ -75,15 +74,12 @@ Yeah, and then there are the type-converting functions:
 
 ## Notes
 
-Namespaced keywords and symbols will be rejected with an exception.
+* Namespaced keywords and symbols will be rejected with an exception.
 
-## Serving Suggestions
-
-```clojure
-(defn map-keys [f m]
-  (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
-    (into {} (map mapper m))))
-```
+* This library has function names that only differ in case and will not work if you AOT compile it to a
+  case-insensitive filesystem (on e.g. Windows and OS X). `lein ring uberwar` always uses AOT and is therefore not
+  compatible with this library on these systems. See [#15](https://github.com/qerub/camel-snake-kebab/issues/15) and
+  [lein-ring#120](https://github.com/weavejester/lein-ring/issues/120) for details.
 
 ### With JSON
 
@@ -102,21 +98,25 @@ Namespaced keywords and symbols will be rejected with an exception.
 ### With Plain Maps
 
 ```clojure
-(map-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
+(transform-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
 ; => {:first-name "John", :last-name "Smith"}
 
 ; And back:
 
-(map-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
+(transform-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
 ; => {"firstName" "John", "lastName" "Smith"}
 ```
 
 ### With JavaBeans
 
 ```clojure
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
 (->> (java.util.Date.)
      (bean)
-     (map-keys ->kebab-case)
+     (transform-keys ->kebab-case)
      :timezone-offset)
 ; => -120
 ```
