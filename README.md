@@ -81,14 +81,6 @@ Yeah, and then there are the type-converting functions:
   compatible with this library on these systems. See [#15](https://github.com/qerub/camel-snake-kebab/issues/15) and
   [lein-ring#120](https://github.com/weavejester/lein-ring/issues/120) for details.
 
-## Serving Suggestions
-
-```clojure
-(defn map-keys [f m]
-  (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
-    (into {} (map mapper m))))
-```
-
 ### With JSON
 
 ```clojure
@@ -106,21 +98,25 @@ Yeah, and then there are the type-converting functions:
 ### With Plain Maps
 
 ```clojure
-(map-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
+(transform-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
 ; => {:first-name "John", :last-name "Smith"}
 
 ; And back:
 
-(map-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
+(transform-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
 ; => {"firstName" "John", "lastName" "Smith"}
 ```
 
 ### With JavaBeans
 
 ```clojure
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
 (->> (java.util.Date.)
      (bean)
-     (map-keys ->kebab-case)
+     (transform-keys ->kebab-case)
      :timezone-offset)
 ; => -120
 ```
