@@ -7,9 +7,9 @@
 
 (deftest transform-keys-test
   (are [x y] (= x (transform-keys csk/->kebab-case-keyword y))
-    nil                            nil
-    {}                             {}
-    []                             []
+    nil nil
+    {} {}
+    [] []
     {:total-books 0 :all-books []} {'total_books 0 "allBooks" []}
     [{:the-author "Dr. Seuss" :the-title "Green Eggs and Ham"}]
     [{'the-Author "Dr. Seuss" "The_Title" "Green Eggs and Ham"}]
