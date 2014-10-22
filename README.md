@@ -81,6 +81,8 @@ Yeah, and then there are the type-converting functions:
   compatible with this library on these systems. See [#15](https://github.com/qerub/camel-snake-kebab/issues/15) and
   [lein-ring#120](https://github.com/weavejester/lein-ring/issues/120) for details.
 
+## Serving Suggestions
+
 ### With JSON
 
 ```clojure
