@@ -40,7 +40,9 @@ There are also functions that convert the value type for you:
 
 1. Add the following to your `project.clj` `:dependencies`:
 
-  [![Clojars Project](http://clojars.org/camel-snake-kebab/latest-version.svg)](http://clojars.org/camel-snake-kebab)
+  ```clojure
+  [camel-snake-kebab "0.2.5-SNAPSHOT"]
+  ```
 
 2. Add the following to your namespace declaration:
 
