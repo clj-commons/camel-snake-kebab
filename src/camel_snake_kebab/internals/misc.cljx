@@ -11,14 +11,14 @@
 
 (defn split [ss]
   (let [cs (mapv classify-char ss)]
-    (loop [result [], start 0, current 0]
+    (loop [result (transient []), start 0, current 0]
       (let [next (inc current)
             result+new (fn [end]
                          (if (> end start)
-                           (conj result (.substring ^String ss start end))
+                           (conj! result (.substring ^String ss start end))
                            result))]
         (cond (>= current (count ss))
-              (result+new current)
+              (persistent! (result+new current))
               
               (= (nth cs current) :whitespace)
               (recur (result+new current) next next)
