@@ -1,5 +1,5 @@
 (ns camel-snake-kebab.internals.misc
-  (:require [clojure.string :refer [join upper-case capitalize]]))
+  (:require [clojure.string :refer [join upper-case capitalize blank?]]))
 
 (defn classify-char [c]
   (case c
@@ -19,10 +19,10 @@
                            result))]
         (cond (>= current (count ss))
               (persistent! (result+new current))
-              
+
               (= (nth cs current) :whitespace)
               (recur (result+new current) next next)
-              
+
               (let [[a b c] (subvec cs current)]
                 ;; This expression is not pretty,
                 ;; but it compiles down to sane JavaScript.
@@ -30,13 +30,15 @@
                     (and (not= a :number) (= b :number))
                     (and (= a :upper) (= b :upper) (= c :lower))))
               (recur (result+new next) next next)
-              
+
               :else
               (recur result start next))))))
 
 (defn convert-case [first-fn rest-fn sep s]
-  (let [[first & rest] (split s)]
-    (join sep (cons (first-fn first) (map rest-fn rest)))))
+  (if-not (blank? s)
+    (let [[first & rest] (split s)]
+      (join sep (cons (first-fn first) (map rest-fn rest))))
+    s))
 
 (def upper-case-http-headers
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})

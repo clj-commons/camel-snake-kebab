@@ -16,11 +16,11 @@
     ["Foo" "Bar"] "FooBar"
     ["foo" "bar"] "foo_bar"
     ["FOO" "BAR"] "FOO_BAR"
-    
+
     ["räksmörgås"] "räksmörgås"
-    
+
     ["IP" "Address"] "IPAddress"
-    
+
     ["Adler" "32"]         "Adler32"
     ["Inet" "4" "Address"] "Inet4Address"
     ["Arc" "2" "D"]        "Arc2D"
@@ -67,7 +67,17 @@
     (are [x y] (= x y)
       :FooBar   (csk/->CamelCaseKeyword  'foo-bar)
       "FOO_BAR" (csk/->SNAKE_CASE_STRING :foo-bar)
-      'foo-bar  (csk/->kebab-case-symbol "foo bar"))))
+      'foo-bar  (csk/->kebab-case-symbol "foo bar")))
+
+  (testing "empty string conversion returns an empty string"
+    (doseq [function [csk/->CamelCase
+                    csk/->camelCase
+                    csk/->SNAKE_CASE
+                    csk/->Snake_case
+                    csk/->snake_case
+                    csk/->kebab-case
+                    csk/->Camel_Snake_Case]]
+      (is (= "" (function ""))))))
 
 (deftest http-header-case-test
   (are [x y] (= x (csk/->HTTP-Header-Case y))
