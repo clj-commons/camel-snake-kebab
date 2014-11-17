@@ -77,7 +77,17 @@
                     csk/->snake_case
                     csk/->kebab-case
                     csk/->Camel_Snake_Case]]
-      (is (= "" (function ""))))))
+      (is (= "" (function "")))))
+
+  (testing "nil conversion returns nil"
+    (doseq [function [csk/->CamelCase
+                    csk/->camelCase
+                    csk/->SNAKE_CASE
+                    csk/->Snake_case
+                    csk/->snake_case
+                    csk/->kebab-case
+                    csk/->Camel_Snake_Case]]
+      (is (nil? (function nil))))))
 
 (deftest http-header-case-test
   (are [x y] (= x (csk/->HTTP-Header-Case y))

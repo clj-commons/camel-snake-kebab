@@ -5,7 +5,7 @@
 (defn type-preserving-function [case-label first-fn rest-fn sep]
   `(let [convert-case# (partial convert-case ~first-fn ~rest-fn ~sep)]
      (defn ~(symbol (str "->" case-label)) [s#]
-       (camel-snake-kebab.core/alter-name s# convert-case#))))
+       (when s# (camel-snake-kebab.core/alter-name s# convert-case#)))))
 
 (defn type-converting-functions [case-label first-fn rest-fn sep]
   (letfn [(make-name [type-label]
