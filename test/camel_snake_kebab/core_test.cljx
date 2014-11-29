@@ -1,35 +1,9 @@
 (ns camel-snake-kebab.core-test
   (:require [camel-snake-kebab.core :as csk]
-            [camel-snake-kebab.internals.misc :refer [split]]
             #+clj  [clojure.test :refer :all]
             #+cljs [cemerick.cljs.test :as t])
   #+cljs (:require-macros [cemerick.cljs.test :refer [deftest is testing are]])
   #+clj  (:import (clojure.lang ExceptionInfo)))
-
-#+clj
-(deftest split-test
-  (are [x y] (= x (split y))
-    [""]  ""
-    [""]  "   "
-    ["x"] " x "
-
-    ["foo" "bar"] "foo bar"
-    ["foo" "bar"] "foo\n\tbar"
-    ["foo" "bar"] "foo-bar"
-    ["foo" "Bar"] "fooBar"
-    ["Foo" "Bar"] "FooBar"
-    ["foo" "bar"] "foo_bar"
-    ["FOO" "BAR"] "FOO_BAR"
-    
-    ["räksmörgås"] "räksmörgås"
-    
-    ["IP" "Address"] "IPAddress"
-    
-    ["Adler" "32"]         "Adler32"
-    ["Inet" "4" "Address"] "Inet4Address"
-    ["Arc" "2" "D"]        "Arc2D"
-    ["a" "123b"]           "a123b"
-    ["A" "123" "B"]        "A123B"))
 
 (def zip (partial map vector))
 
