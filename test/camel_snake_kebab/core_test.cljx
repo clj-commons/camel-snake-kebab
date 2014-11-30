@@ -9,6 +9,10 @@
 #+clj
 (deftest split-test
   (are [x y] (= x (split y))
+    [""]  ""
+    [""]  "   "
+    ["x"] " x "
+
     ["foo" "bar"] "foo bar"
     ["foo" "bar"] "foo\n\tbar"
     ["foo" "bar"] "foo-bar"
@@ -67,7 +71,11 @@
     (are [x y] (= x y)
       :FooBar   (csk/->CamelCaseKeyword  'foo-bar)
       "FOO_BAR" (csk/->SNAKE_CASE_STRING :foo-bar)
-      'foo-bar  (csk/->kebab-case-symbol "foo bar"))))
+      'foo-bar  (csk/->kebab-case-symbol "foo bar")))
+
+  (testing "handling of blank input string"
+    (is (= "" (csk/->kebab-case "")))
+    (is (= "" (csk/->kebab-case " ")))))
 
 (deftest http-header-case-test
   (are [x y] (= x (csk/->HTTP-Header-Case y))

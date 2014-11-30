@@ -18,7 +18,9 @@
                            (conj! result (.substring ^String ss start end))
                            result))]
         (cond (>= current (count ss))
-              (persistent! (result+new current))
+              (or (seq (persistent! (result+new current)))
+                  ;; Return this instead of an empty seq:
+                  [""])
               
               (= (nth cs current) :whitespace)
               (recur (result+new current) next next)
