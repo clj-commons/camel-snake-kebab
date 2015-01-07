@@ -15,6 +15,7 @@
                  (symbol)))]
     (for [[type-label type-converter] {"string" `identity "symbol" `symbol "keyword" `keyword}]
       `(defn ~(make-name type-label) [s#]
+         {:pre [(not (nil? s#))]}
          (->> (name s#)
               (convert-case ~first-fn ~rest-fn ~sep)
               ~type-converter)))))
