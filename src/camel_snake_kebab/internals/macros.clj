@@ -3,8 +3,8 @@
             [camel-snake-kebab.internals.misc :refer [convert-case]]))
 
 (defn type-preserving-function [case-label first-fn rest-fn sep]
-  `(let [convert-case# (partial convert-case ~first-fn ~rest-fn ~sep)]
-     (defn ~(symbol (str "->" case-label)) [s#]
+  `(defn ~(symbol (str "->" case-label)) [s# & rest#]
+     (let [convert-case# #(apply convert-case ~first-fn ~rest-fn ~sep % rest#)]
        (camel-snake-kebab.core/alter-name s# convert-case#))))
 
 (defn type-converting-functions [case-label first-fn rest-fn sep]
@@ -14,11 +14,9 @@
                  (str "->")
                  (symbol)))]
     (for [[type-label type-converter] {"string" `identity "symbol" `symbol "keyword" `keyword}]
-      `(defn ~(make-name type-label) [s#]
+      `(defn ~(make-name type-label) [s# & rest#]
          {:pre [(not (nil? s#))]}
-         (->> (name s#)
-              (convert-case ~first-fn ~rest-fn ~sep)
-              ~type-converter)))))
+         (~type-converter (apply convert-case ~first-fn ~rest-fn ~sep (name s#) rest#))))))
 
 (defmacro defconversion [case-label first-fn rest-fn sep]
   `(do  ~(type-preserving-function  case-label first-fn rest-fn sep)

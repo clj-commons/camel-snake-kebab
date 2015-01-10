@@ -6,6 +6,7 @@ A Clojure library for word case conversions.
 
 ### To be released
 
+* Optional new argument `:separator` allows you to control how words are separated.
 * **Breaking changes:**
   * `CamelCase` has been renamed to `PascalCase`.
   * `SNAKE_CASE` has been renamed to `SCREAMING_SNAKE_CASE`.
@@ -44,6 +45,15 @@ There are also functions that convert the value type for you:
 (->kebab-case-keyword "object_id")
 ; => :object-id
 ```
+
+If the default way of separating words doesn't work in your use case, you can override it:
+
+```clojure
+(->snake_case :s3-key :separator \-)
+; => :s3_key
+```
+
+The `:separator` argument can either be a regex, string or character.
 
 ## Installation
 

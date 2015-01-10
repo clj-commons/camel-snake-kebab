@@ -14,7 +14,8 @@
       "I_AM_CONSTANT" (csk/->SCREAMING_SNAKE_CASE "I am constant")
       :object-id      (csk/->kebab-case :object_id)
       "X-SSL-Cipher"  (csk/->HTTP-Header-Case "x-ssl-cipher")
-      :object-id      (csk/->kebab-case-keyword "object_id")))
+      :object-id      (csk/->kebab-case-keyword "object_id"))
+      :s3_key         (csk/->snake_case :s3-key :separator \-))
 
   (testing "rejection of namespaced keywords and symbols"
     (is (thrown? ExceptionInfo (csk/->PascalCase (keyword "a" "b"))))

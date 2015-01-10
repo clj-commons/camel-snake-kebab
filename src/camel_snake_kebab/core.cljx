@@ -28,10 +28,10 @@
       (throw (ex-info "Namespaced symbols are not supported" {:input this}))
       (-> this name f symbol))))
 
-(defn convert-case [first-fn rest-fn sep s]
+(defn convert-case [first-fn rest-fn sep s & rest]
   "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."  
-  (misc/convert-case first-fn rest-fn sep s))
+  (apply misc/convert-case first-fn rest-fn sep s rest))
 
 ;; These are fully qualified to workaround some issue with ClojureScript:
 
