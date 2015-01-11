@@ -4,6 +4,15 @@ A Clojure library for word case conversions.
 
 ## News
 
+### To be released
+
+* **Breaking changes:**
+  * `CamelCase` has been renamed to `PascalCase`.
+  * `SNAKE_CASE` has been renamed to `SCREAMING_SNAKE_CASE`.
+  * `Snake_case` has been removed.
+* The above changes makes the library AOT compilable on case-insensitive filesystems.
+  In practice, this means you can e.g. use `lein ring uberwar` on Windows and OS X.
+
 ### 2014-07-28: 0.2.0
 
 * Supports ClojureScript!
@@ -16,10 +25,10 @@ A Clojure library for word case conversions.
 ```clojure
 (use 'camel-snake-kebab.core)
 
-(->CamelCase 'flux-capacitor)
-; => 'FluxCapacitor
+(->camelCase 'flux-capacitor)
+; => 'fluxCapacitor
 
-(->SNAKE_CASE "I am constant")
+(->SCREAMING_SNAKE_CASE "I am constant")
 ; => "I_AM_CONSTANT"
 
 (->kebab-case :object_id)
@@ -52,10 +61,9 @@ There are also functions that convert the value type for you:
 
 ## Available Conversion Functions
 
-* `->CamelCase`
+* `->PascalCase`
 * `->camelCase`
-* `->SNAKE_CASE`
-* `->Snake_case`
+* `->SCREAMING_SNAKE_CASE`
 * `->snake_case`
 * `->kebab-case`
 * `->Camel_Snake_Case`
@@ -65,10 +73,9 @@ You should be able to figure out all what all of them do.
 
 Yeah, and then there are the type-converting functions:
 
-* `->CamelCase{Keyword, String, Symbol}`
+* `->PascalCase{Keyword, String, Symbol}`
 * `->camelCase{Keyword, String, Symbol}`
-* `->SNAKE_CASE_{KEYWORD, STRING, SYMBOL}`
-* `->Snake_case_{keyword, string, symbol}`
+* `->SCREAMING_SNAKE_CASE_{KEYWORD, STRING, SYMBOL}`
 * `->snake_case_{keyword, string, symbol}`
 * `->kebab-case-{keyword, string, symbol}`
 * `->Camel_Snake_Case_{Keyword, String, Symbol}`
@@ -77,11 +84,6 @@ Yeah, and then there are the type-converting functions:
 ## Notes
 
 * Namespaced keywords and symbols will be rejected with an exception.
-
-* This library has function names that only differ in case and will not work if you AOT compile it to a
-  case-insensitive filesystem (on e.g. Windows and OS X). `lein ring uberwar` always uses AOT and is therefore not
-  compatible with this library on these systems. See [#15](https://github.com/qerub/camel-snake-kebab/issues/15) and
-  [lein-ring#120](https://github.com/weavejester/lein-ring/issues/120) for details.
 
 ## Serving Suggestions
 
