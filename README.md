@@ -4,7 +4,7 @@ A Clojure library for word case conversions.
 
 ## News
 
-### To be released
+### 2015-01-17: 0.3.0
 
 * Optional new argument `:separator` allows you to control how words are separated.
 * **Breaking changes:**
