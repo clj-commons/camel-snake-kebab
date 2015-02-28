@@ -1,4 +1,4 @@
-# Camel_SNAKE-kebab
+# camel-snake-kebab
 
 A Clojure library for word case conversions.
 
