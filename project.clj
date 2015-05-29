@@ -10,8 +10,7 @@
 
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
                                   [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
-                   :hooks [cljx.hooks]
-                   :plugins [[com.keminglabs/cljx "0.4.0"]
+                   :plugins [[com.keminglabs/cljx "0.6.0"]
                              [com.cemerick/clojurescript.test "0.3.1"]
                              [lein-cljsbuild "1.0.3"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
@@ -40,4 +39,5 @@
                         :compiler {:output-to "target/testable.js" :optimizations :simple}}]
               :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
 
-  :aliases {"test-all" ["do" "test," "cljsbuild" "test"]})
+  :aliases {"test"   ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]
+            "deploy" ["do" "clean," "cljx" "once," "deploy" "clojars"]})
