@@ -16,7 +16,7 @@
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [org.clojure/clojurescript "0.0-2371" :scope "provided"]]}}
 
-  :jar-exclusions [#"\.cljx"]
+  :jar-exclusions [#"\.cljx|\.DS_Store"]
 
   :source-paths ["src" "target/generated-src"]
 
