@@ -5,9 +5,10 @@
             #+cljs [camel-snake-kebab.internals.alter-name]) ;; Needed for expansion of defconversion
   #+cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]]))
 
-(defn convert-case [first-fn rest-fn sep s & rest]
+(defn convert-case
   "Converts the case of a string according to the rule for the first
-  word, remaining words, and the separator."  
+  word, remaining words, and the separator."
+  [first-fn rest-fn sep s & rest]
   (apply misc/convert-case first-fn rest-fn sep s rest))
 
 ;; These are fully qualified to workaround some issue with ClojureScript:
