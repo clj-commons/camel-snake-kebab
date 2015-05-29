@@ -11,7 +11,7 @@
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
                                   [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
                    :plugins [[com.keminglabs/cljx "0.6.0"]
-                             [com.cemerick/clojurescript.test "0.3.1"]
+                             [com.cemerick/clojurescript.test "0.3.3"]
                              [lein-cljsbuild "1.0.6"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [org.clojure/clojurescript "0.0-2371" :scope "provided"]]}}
