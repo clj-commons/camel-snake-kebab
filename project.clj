@@ -22,6 +22,8 @@
 
   :test-paths ["test" "target/generated-test"]
 
+  :auto-clean false ;; Needed for cljx
+
   :cljx {:builds [{:source-paths ["src"]
                    :output-path "target/generated-src"
                    :rules :clj}
@@ -40,4 +42,5 @@
               :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
 
   :aliases {"test"   ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]
-            "deploy" ["do" "clean," "cljx" "once," "deploy" "clojars"]})
+            "deploy" ["do" "clean," "cljx" "once," "deploy" "clojars"]
+            "jar"    ["do" "clean," "cljx" "once," "jar"]})
