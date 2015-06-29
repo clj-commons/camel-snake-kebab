@@ -41,7 +41,7 @@ The `:separator` argument can either be a regex, string or character.
 1. Add the following to your `project.clj` `:dependencies`:
 
   ```clojure
-  [camel-snake-kebab "0.3.2-SNAPSHOT"]
+  [camel-snake-kebab "0.3.2"]
   ```
 
 2. Add the following to your namespace declaration:
