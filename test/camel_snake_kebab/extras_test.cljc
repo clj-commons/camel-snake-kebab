@@ -1,9 +1,8 @@
 (ns camel-snake-kebab.extras-test
   (:require [camel-snake-kebab.core :as csk]
             [camel-snake-kebab.extras :refer [transform-keys]]
-            #+clj  [clojure.test :refer :all]
-            #+cljs [cemerick.cljs.test :as t])
-  #+cljs (:require-macros [cemerick.cljs.test :refer [deftest is testing are]]))
+            #?(:clj [clojure.test :refer :all]
+               :cljs [cljs.test :refer-macros [deftest testing is are]])))
 
 (deftest transform-keys-test
   (are [x y] (= x (transform-keys csk/->kebab-case-keyword y))

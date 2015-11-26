@@ -1,6 +1,8 @@
 language: clojure
 
-script: lein with-profile dev:dev,1.6 do cljx once, test, cljsbuild test
+lein: lein2
+
+script: lein with-profile dev test-all
 
 jdk:
   - openjdk7
