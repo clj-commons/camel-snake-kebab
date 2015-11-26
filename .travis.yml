@@ -1,8 +1,7 @@
 language: clojure
 
-script:
-  - lein upgrade
-  - lein with-profile dev test-all
+before_script: yes | lein upgrade
+script: lein with-profile dev test-all
 
 jdk:
   - openjdk7
