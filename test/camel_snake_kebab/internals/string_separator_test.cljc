@@ -1,8 +1,8 @@
 (ns camel-snake-kebab.internals.string-separator-test
   (:require [camel-snake-kebab.internals.string-separator :refer [split generic-separator]]
-            #+clj  [clojure.test :refer :all]
-            #+cljs [cemerick.cljs.test :as t])
-  #+cljs (:require-macros [cemerick.cljs.test :refer [deftest testing is are]]))
+            #?(:clj [clojure.test :refer :all]
+               :cljs [cljs.test :refer-macros [deftest is testing are]])
+))
 
 (deftest split-test
   (testing "regex, string and character separators"

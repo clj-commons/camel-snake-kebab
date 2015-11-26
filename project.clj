@@ -8,39 +8,22 @@
 
   :dependencies []
 
-  :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
-                                  [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
-                   :plugins [[com.keminglabs/cljx "0.6.0"]
-                             [com.cemerick/clojurescript.test "0.3.3"]
-                             [lein-cljsbuild "1.0.6"]]}
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
+                                  [org.clojure/clojurescript "1.7.170" :scope "provided"]]
+                   :plugins [[lein-cljsbuild "1.1.1"]
+                             [lein-doo "0.1.6-rc.1"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [org.clojure/clojurescript "0.0-2371" :scope "provided"]]}}
 
-  :jar-exclusions [#"\.cljx|\.DS_Store"]
+  :source-paths ["src"]
 
-  :source-paths ["src" "target/generated-src"]
+  :test-paths ["test"]
 
-  :test-paths ["test" "target/generated-test"]
+  :cljsbuild {:builds [{:id "test"
+                        :source-paths ["src" "test"]
+                        :compiler {:output-to "target/testable.js"
+                                   :main "camel-snake-kebab.runner"
+                                   :target :nodejs
+                                   :optimizations :simple}}]}
 
-  :auto-clean false ;; Needed for cljx
-
-  :cljx {:builds [{:source-paths ["src"]
-                   :output-path "target/generated-src"
-                   :rules :clj}
-                  {:source-paths ["src"]
-                   :output-path "target/generated-src"
-                   :rules :cljs}
-                  {:source-paths ["test"]
-                   :output-path "target/generated-test"
-                   :rules :clj}
-                  {:source-paths ["test"]
-                   :output-path "target/generated-test"
-                   :rules :cljs}]}
-
-  :cljsbuild {:builds [{:source-paths ["target/generated-src" "target/generated-test"]
-                        :compiler {:output-to "target/testable.js" :optimizations :simple}}]
-              :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
-
-  :aliases {"test"   ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]
-            "deploy" ["do" "clean," "cljx" "once," "deploy" "clojars"]
-            "jar"    ["do" "clean," "cljx" "once," "jar"]})
+  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once"]})

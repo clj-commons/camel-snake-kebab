@@ -1,14 +1,12 @@
 (ns camel-snake-kebab.internals.alter-name
-  #+clj (:import (clojure.lang Keyword Symbol)))
+  #?(:clj (:import (clojure.lang Keyword Symbol))))
 
 (defprotocol AlterName
   (alter-name [this f] "Alters the name of this with f."))
 
 (extend-protocol AlterName
-  #+clj
-  String
-  #+cljs
-  string
+  #?(:clj String
+     :cljs string)
   (alter-name [this f]
     (-> this f))
 
