@@ -15,7 +15,9 @@
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [org.clojure/clojurescript "0.0-2371" :scope "provided"]]}}
 
-  :source-paths ["src"]
+  :min-lein-version "2.5.2"
+
+  :source-paths ["src" "test"]
 
   :test-paths ["test"]
 
