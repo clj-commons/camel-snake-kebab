@@ -1,9 +1,8 @@
 (ns camel-snake-kebab.core-test
   (:require [camel-snake-kebab.core :as csk]
-            #+clj  [clojure.test :refer :all]
-            #+cljs [cemerick.cljs.test :as t])
-  #+cljs (:require-macros [cemerick.cljs.test :refer [deftest is testing are]])
-  #+clj  (:import (clojure.lang ExceptionInfo)))
+            #?(:clj [clojure.test :refer :all]
+               :cljs [cljs.test :refer-macros [deftest is testing are]]))
+  #?(:clj (:import (clojure.lang ExceptionInfo))))
 
 (def zip (partial map vector))
 

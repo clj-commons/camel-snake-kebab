@@ -1,4 +1,4 @@
-(defproject camel-snake-kebab "0.3.2"
+(defproject camel-snake-kebab "0.3.3-SNAPSHOT"
   :description "A library for word case conversions."
   :url "https://github.com/qerub/camel-snake-kebab"
   :license {:name "Eclipse Public License"
@@ -8,39 +8,24 @@
 
   :dependencies []
 
-  :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
-                                  [org.clojure/clojurescript "0.0-2227" :scope "provided"]]
-                   :plugins [[com.keminglabs/cljx "0.6.0"]
-                             [com.cemerick/clojurescript.test "0.3.3"]
-                             [lein-cljsbuild "1.0.6"]]}
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
+                                  [org.clojure/clojurescript "1.7.170" :scope "provided"]]
+                   :plugins [[lein-cljsbuild "1.1.1"]
+                             [lein-doo "0.1.6-rc.1"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [org.clojure/clojurescript "0.0-2371" :scope "provided"]]}}
 
-  :jar-exclusions [#"\.cljx|\.DS_Store"]
+  :min-lein-version "2.5.2"
 
-  :source-paths ["src" "target/generated-src"]
+  :source-paths ["src" "test"]
 
-  :test-paths ["test" "target/generated-test"]
+  :test-paths ["test"]
 
-  :auto-clean false ;; Needed for cljx
+  :cljsbuild {:builds [{:id "test"
+                        :source-paths ["src" "test"]
+                        :compiler {:output-to "target/testable.js"
+                                   :main "camel-snake-kebab.runner"
+                                   :target :nodejs
+                                   :optimizations :simple}}]}
 
-  :cljx {:builds [{:source-paths ["src"]
-                   :output-path "target/generated-src"
-                   :rules :clj}
-                  {:source-paths ["src"]
-                   :output-path "target/generated-src"
-                   :rules :cljs}
-                  {:source-paths ["test"]
-                   :output-path "target/generated-test"
-                   :rules :clj}
-                  {:source-paths ["test"]
-                   :output-path "target/generated-test"
-                   :rules :cljs}]}
-
-  :cljsbuild {:builds [{:source-paths ["target/generated-src" "target/generated-test"]
-                        :compiler {:output-to "target/testable.js" :optimizations :simple}}]
-              :test-commands {"unit-tests" ["node" :node-runner "target/testable.js"]}}
-
-  :aliases {"test"   ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]
-            "deploy" ["do" "clean," "cljx" "once," "deploy" "clojars"]
-            "jar"    ["do" "clean," "cljx" "once," "jar"]})
+  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once"]})

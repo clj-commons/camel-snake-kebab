@@ -1,9 +1,9 @@
 (ns camel-snake-kebab.core
   (:require [clojure.string]
             [camel-snake-kebab.internals.misc :as misc]
-            #+clj  [camel-snake-kebab.internals.macros :refer [defconversion]]
-            #+cljs [camel-snake-kebab.internals.alter-name]) ;; Needed for expansion of defconversion
-  #+cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]]))
+            #?(:clj [camel-snake-kebab.internals.macros :refer [defconversion]]
+               :cljs [camel-snake-kebab.internals.alter-name]))
+  #?(:cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]])))
 
 (defn convert-case
   "Converts the case of a string according to the rule for the first

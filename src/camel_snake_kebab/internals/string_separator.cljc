@@ -1,35 +1,34 @@
 (ns camel-snake-kebab.internals.string-separator
-  #+clj (:import (java.util.regex Pattern)))
+  #?(:clj (:import (java.util.regex Pattern))))
 
-#+clj
-(set! *warn-on-reflection* true)
+#?(:clj (set! *warn-on-reflection* true))
 
 (defprotocol StringSeparator
   (split [this s] ": StringSeparator -> String -> NonEmptySeq[String]"))
 
-#+clj
-(letfn [(split-by-pattern [^Pattern p, ^String s]
-          (seq (.split p s)))
-        ;; These could be optimized e.g. by using StringUtils in Apache Commons:
-        (split-by-string [^String p, ^String s]
-          (split-by-pattern (-> p Pattern/quote Pattern/compile) s))
-        (split-by-char [^Character p, ^String s]
-          (split-by-string (String/valueOf p) s))]
-  (extend Pattern   StringSeparator {:split split-by-pattern})
-  (extend String    StringSeparator {:split split-by-string})
-  (extend Character StringSeparator {:split split-by-char}))
+#?(:clj
+   (letfn [(split-by-pattern [^Pattern p, ^String s]
+             (seq (.split p s)))
+           ;; These could be optimized e.g. by using StringUtils in Apache Commons:
+           (split-by-string [^String p, ^String s]
+             (split-by-pattern (-> p Pattern/quote Pattern/compile) s))
+           (split-by-char [^Character p, ^String s]
+             (split-by-string (String/valueOf p) s))]
+     (extend Pattern   StringSeparator {:split split-by-pattern})
+     (extend String    StringSeparator {:split split-by-string})
+     (extend Character StringSeparator {:split split-by-char}))
 
-#+cljs
-(extend-protocol StringSeparator
-  ;; Notes:
-  ;; * Characters are just strings in ClojureScript.
-  ;; * Using js/RegExp generates a warning, but what's the right way?
+   :cljs
+   (extend-protocol StringSeparator
+     ;; Notes:
+     ;; * Characters are just strings in ClojureScript.
+     ;; * Using js/RegExp generates a warning, but what's the right way?
 
-  js/RegExp
-  (split [this s] (seq (.split s this)))
+     js/RegExp
+     (split [this s] (seq (.split s this)))
 
-  string
-  (split [this s] (seq (.split s this))))
+     string
+     (split [this s] (seq (.split s this)))))
 
 (defn classify-char [c]
   (case c

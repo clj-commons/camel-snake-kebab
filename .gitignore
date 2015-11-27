@@ -3,6 +3,8 @@
 /classes
 /checkouts
 pom.xml
+.nrepl-port
+/out
 *.jar
 *.class
 .lein-deps-sum
