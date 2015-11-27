@@ -1,6 +1,11 @@
 language: clojure
 
-before_script: yes | lein upgrade
+lein: lein2
+
+cache:
+  directories:
+    - $HOME/.m2
+
 script: lein with-profile dev test-all
 
 jdk:
