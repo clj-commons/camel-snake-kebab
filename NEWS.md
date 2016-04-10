@@ -1,5 +1,10 @@
 # News
 
+## To be released: 0.4.0
+
+* Uses reader conditionals instead of cljx.
+* Requires Clojure[Script] version >= 1.7.
+
 ## 2015-01-17: 0.3.0
 
 * Optional new argument `:separator` allows you to control how words are separated.
