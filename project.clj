@@ -13,6 +13,8 @@
                    :plugins [[lein-cljsbuild "1.1.3"]
                              [lein-doo "0.1.6"]]}}
 
+  :jar-exclusions [#"\.DS_Store"]
+
   :source-paths ["src"]
 
   :test-paths ["test"]
