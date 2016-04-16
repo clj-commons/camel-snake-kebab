@@ -1,6 +1,6 @@
 # camel-snake-kebab
 
-A Clojure library for word case conversions.
+A Clojure[Script] library for word case conversions.
 
 ## Examples
 
