@@ -148,6 +148,6 @@ If you're going to do case conversion in a hot spot, use [core.memoize](https://
 
 ## License
 
-Copyright (C) 2012-2015 the AUTHORS.
+Copyright (C) 2012-2016 the AUTHORS.
 
 Distributed under the Eclipse Public License 1.0 (the same as Clojure).
