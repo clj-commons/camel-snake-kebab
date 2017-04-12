@@ -127,7 +127,7 @@ If you're going to do case conversion in a hot spot, use [core.memoize](https://
 (use 'criterium.core)
 
 (def memoized->kebab-case
-  (memo-fifo ->kebab-case 512))
+  (fifo ->kebab-case {} :fifo/threshold 512))
 
 (quick-bench (->kebab-case "firstName"))
 ; ... Execution time mean : 6,384971 µs ...
