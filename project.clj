@@ -11,7 +11,10 @@
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
                                   [org.clojure/clojurescript "1.7.228" :scope "provided"]]
                    :plugins [[lein-cljsbuild "1.1.3"]
-                             [lein-doo "0.1.6"]]}}
+                             [lein-doo "0.1.6"]]}
+             :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}
+             :1.9 {:dependencies [[org.clojure/clojure "1.9.0-alpha16"]
+                                  [org.clojure/clojurescript "1.9.542" :scope "provided"]]}}
 
   :jar-exclusions [#"\.DS_Store"]
 
