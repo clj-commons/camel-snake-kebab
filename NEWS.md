@@ -1,6 +1,6 @@
 # News
 
-## 2016-04-16: 0.4.0
+## 2016-04-16: 0.4.0 - The Malmö Release
 
 * Uses reader conditionals instead of cljx.
 * Requires Clojure[Script] version >= 1.7.
