@@ -1,7 +1,5 @@
 language: clojure
 
-lein: lein2
-
 script: lein with-profile dev:dev,1.8:dev,1.9 test-all
 
 jdk:
