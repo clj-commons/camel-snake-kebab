@@ -13,8 +13,8 @@
                    :plugins [[lein-cljsbuild "1.1.3"]
                              [lein-doo "0.1.6"]]}
              :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}
-             :1.9 {:dependencies [[org.clojure/clojure "1.9.0-alpha16"]
-                                  [org.clojure/clojurescript "1.9.542" :scope "provided"]]}}
+             :1.9 {:dependencies [[org.clojure/clojure "1.9.0"]
+                                  [org.clojure/clojurescript "1.9.946" :scope "provided"]]}}
 
   :jar-exclusions [#"\.DS_Store"]
 
