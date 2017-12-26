@@ -39,14 +39,16 @@
     :other))
 
 (defn generic-split [ss]
-  (let [cs (mapv classify-char ss)]
+  (let [cs (mapv classify-char ss)
+        ss-length #?(:clj (.length ^String ss)
+                     :cljs (.-length ss))]
     (loop [result (transient []), start 0, current 0]
       (let [next (inc current)
             result+new (fn [end]
                          (if (> end start)
                            (conj! result (.substring ^String ss start end))
                            result))]
-        (cond (>= current (count ss))
+        (cond (>= current ss-length)
               (or (seq (persistent! (result+new current)))
                   ;; Return this instead of an empty seq:
                   [""])
