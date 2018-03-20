@@ -1,8 +1,8 @@
 (ns camel-snake-kebab.core
   (:require [clojure.string]
+            [camel-snake-kebab.internals.alter-name :as internals]
             [camel-snake-kebab.internals.misc :as misc]
-            #?(:clj [camel-snake-kebab.internals.macros :refer [defconversion]]
-               :cljs [camel-snake-kebab.internals.alter-name])) ;; Needed for expansion of defconversion
+            #?(:clj [camel-snake-kebab.internals.macros :refer [defconversion]]))
   #?(:cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]])))
 
 (defn convert-case
@@ -10,6 +10,12 @@
   word, remaining words, and the separator."
   [first-fn rest-fn sep s & rest]
   (apply misc/convert-case first-fn rest-fn sep s rest))
+
+(defn alter-name
+  "Alters the name of s with f. If s is a string it is used as the name
+  and supplied to f directly."
+  [s f]
+  (internals/alter-name s f))
 
 ;; These are fully qualified to workaround some issue with ClojureScript:
 

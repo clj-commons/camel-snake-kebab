@@ -1,6 +1,5 @@
 (ns camel-snake-kebab.internals.macros
-  (:require [clojure.string :refer [join]]
-            [camel-snake-kebab.internals.alter-name :refer [alter-name]]
+  (:require [camel-snake-kebab.internals.alter-name :refer [alter-name]]
             [camel-snake-kebab.internals.misc :refer [convert-case]]))
 
 (defn type-preserving-function [case-label first-fn rest-fn sep]
