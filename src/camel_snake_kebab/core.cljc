@@ -20,3 +20,4 @@
 (defconversion "snake_case"           clojure.string/lower-case clojure.string/lower-case "_")
 (defconversion "kebab-case"           clojure.string/lower-case clojure.string/lower-case "-")
 (defconversion "HTTP-Header-Case"     camel-snake-kebab.internals.misc/capitalize-http-header camel-snake-kebab.internals.misc/capitalize-http-header "-")
+(defconversion "PascamelCase"         camel-snake-kebab.internals.misc/lower-case-rest clojure.string/capitalize "")

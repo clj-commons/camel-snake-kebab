@@ -54,6 +54,7 @@ The `:separator` argument can either be a regex, string or character.
 
 * `->PascalCase`
 * `->camelCase`
+* `->PascamelCase` (respects case of the first character)
 * `->SCREAMING_SNAKE_CASE`
 * `->snake_case`
 * `->kebab-case`
@@ -66,6 +67,7 @@ Yeah, and then there are the type-converting functions:
 
 * `->PascalCase{Keyword, String, Symbol}`
 * `->camelCase{Keyword, String, Symbol}`
+* `->PascamelCase-{Keyword, String, Symbol}`
 * `->SCREAMING_SNAKE_CASE_{KEYWORD, STRING, SYMBOL}`
 * `->snake_case_{keyword, string, symbol}`
 * `->kebab-case-{keyword, string, symbol}`

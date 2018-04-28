@@ -39,6 +39,19 @@
       (doseq [input inputs, format formats, [output function] (zip inputs functions)]
         (is (= (format output) (function (format input)))))))
 
+  (testing "->PascamelCase"
+    (let [inputs ["FooBar"
+                  "fooBar"
+                  "FOO_BAR"
+                  "foo_bar"
+                  "foo-bar"
+                  "Foo_Bar"]]
+      (doseq [input inputs
+              :let [first-letter (str (first input))]]
+        (if (= (clojure.string/upper-case first-letter) first-letter)
+          (is (= (csk/->PascalCase input) (csk/->PascamelCase input)))
+          (is (= (csk/->camelCase input) (csk/->PascamelCase input)))))))
+
   (testing "some of the type converting functions"
     (are [x y] (= x y)
       :FooBar   (csk/->PascalCaseKeyword 'foo-bar)
