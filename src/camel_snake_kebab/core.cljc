@@ -5,6 +5,39 @@
                :cljs [camel-snake-kebab.internals.alter-name])) ;; Needed for expansion of defconversion
   #?(:cljs (:require-macros [camel-snake-kebab.internals.macros :refer [defconversion]])))
 
+(declare
+  ->PascalCase
+  ->Camel_Snake_Case
+  ->camelCase
+  ->SCREAMING_SNAKE_CASE
+  ->snake_case
+  ->kebab-case
+  ->HTTP-Header-Case
+
+  ->PascalCaseKeyword
+  ->camelCaseKeyword
+  ->SCREAMING_SNAKE_CASE_KEYWORD
+  ->snake_case_keyword
+  ->kebab-case-keyword
+  ->Camel_Snake_Case_Keyword
+  ->HTTP-Header-Case-Keyword
+
+  ->PascalCaseString
+  ->camelCaseString
+  ->SCREAMING_SNAKE_CASE_STRING
+  ->snake_case_string
+  ->kebab-case-string
+  ->Camel_Snake_Case_String
+  ->HTTP-Header-Case-String
+
+  ->PascalCaseSymbol
+  ->camelCaseSymbol
+  ->SCREAMING_SNAKE_CASE_SYMBOL
+  ->snake_case_symbol
+  ->kebab-case-symbol
+  ->Camel_Snake_Case_Symbol
+  ->HTTP-Header-Case-Symbol)
+
 (defn convert-case
   "Converts the case of a string according to the rule for the first
   word, remaining words, and the separator."
