@@ -123,11 +123,11 @@ Yeah, and then there are the type-converting functions:
 If you're going to do case conversion in a hot spot, use [core.memoize](https://github.com/clojure/core.memoize) to avoid doing the same conversions over and over again.
 
 ```clojure
-(use 'clojure.core.memoize)
+(require '[clojure.core.memoize :as memoize])
 (use 'criterium.core)
 
 (def memoized->kebab-case
-  (memo-fifo ->kebab-case 512))
+  (memoize/fifo ->kebab-case {} :fifo/threshold 512))
 
 (quick-bench (->kebab-case "firstName"))
 ; ... Execution time mean : 6,384971 µs ...
