@@ -1,37 +1,149 @@
-## Welcome to GitHub Pages
+# Examples
 
-You can use the [editor on GitHub](https://github.com/clj-commons/camel-snake-kebab/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+```clojure
+(use 'camel-snake-kebab.core)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+(->camelCase 'flux-capacitor)
+; => 'fluxCapacitor
 
-### Markdown
+(->SCREAMING_SNAKE_CASE "I am constant")
+; => "I_AM_CONSTANT"
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+(->kebab-case :object_id)
+; => :object-id
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+(->HTTP-Header-Case "x-ssl-cipher")
+; => "X-SSL-Cipher"
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+There are also functions that convert the value type for you:
 
-### Jekyll Themes
+```clojure
+(->kebab-case-keyword "object_id")
+; => :object-id
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/clj-commons/camel-snake-kebab/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+If the default way of separating words doesn't work in your use case, you can override it:
 
-### Support or Contact
+```clojure
+(->snake_case :s3-key :separator \-)
+; => :s3_key
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The `:separator` argument can either be a regex, string or character.
+
+# Installation
+
+1. Add the following to your `project.clj` `:dependencies`:
+
+  ```clojure
+  [camel-snake-kebab "0.4.0"]
+  ```
+
+2. Add the following to your namespace declaration:
+
+  ```clojure
+  :require [camel-snake-kebab.core :refer :all]
+  ```
+
+# Available Conversion Functions
+
+* `->PascalCase`
+* `->camelCase`
+* `->SCREAMING_SNAKE_CASE`
+* `->snake_case`
+* `->kebab-case`
+* `->Camel_Snake_Case`
+* `->HTTP-Header-Case`
+
+You should be able to figure out all what all of them do.
+
+Yeah, and then there are the type-converting functions:
+
+* `->PascalCase{Keyword, String, Symbol}`
+* `->camelCase{Keyword, String, Symbol}`
+* `->SCREAMING_SNAKE_CASE_{KEYWORD, STRING, SYMBOL}`
+* `->snake_case_{keyword, string, symbol}`
+* `->kebab-case-{keyword, string, symbol}`
+* `->Camel_Snake_Case_{Keyword, String, Symbol}`
+* `->HTTP-Header-Case-{Keyword, String, Symbol}`
+
+# Notes
+
+* Namespaced keywords and symbols will be rejected with an exception.
+
+# Serving Suggestions
+
+## With JSON
+
+```clojure
+(require '[clojure.data.json :as json])
+
+(json/read-str "{\"firstName\":\"John\",\"lastName\":\"Smith\"}" :key-fn ->kebab-case-keyword)
+; => {:first-name "John", :last-name "Smith"}
+
+; And back:
+
+(json/write-str {:first-name "John", :last-name "Smith"} :key-fn ->camelCaseString)
+; => "{\"firstName\":\"John\",\"lastName\":\"Smith\"}"
+```
+
+## With Plain Maps
+
+```clojure
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
+(transform-keys ->kebab-case-keyword {"firstName" "John", "lastName" "Smith"})
+; => {:first-name "John", :last-name "Smith"}
+
+; And back:
+
+(transform-keys ->camelCaseString {:first-name "John", :last-name "Smith"})
+; => {"firstName" "John", "lastName" "Smith"}
+```
+
+## With JavaBeans
+
+```clojure
+(require '[camel-snake-kebab.extras :refer [transform-keys]])
+
+(->> (java.util.Date.)
+     (bean)
+     (transform-keys ->kebab-case)
+     :timezone-offset)
+; => -120
+```
+
+## With Memoization
+
+If you're going to do case conversion in a hot spot, use [core.memoize](https://github.com/clojure/core.memoize) to avoid doing the same conversions over and over again.
+
+```clojure
+(use 'clojure.core.memoize)
+(use 'criterium.core)
+
+(def memoized->kebab-case
+  (fifo ->kebab-case {} :fifo/threshold 512))
+
+(quick-bench (->kebab-case "firstName"))
+; ... Execution time mean : 6,384971 µs ...
+
+(quick-bench (memoized->kebab-case "firstName"))
+; ... Execution time mean : 700,146806 ns ...
+```
+
+# Further Reading
+
+* [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
+* [Wikipedia about usage of letter case in computer programming](http://en.wikipedia.org/wiki/Letter_case#Computers)
+
+# Alternatives
+
+* [org.tobereplaced/lettercase](https://github.com/ToBeReplaced/lettercase)
+* [com.google.common.base.CaseFormat](http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/base/CaseFormat.html)
+
+# License
+
+Copyright (C) 2012-2019 the AUTHORS.
+
+Distributed under the Eclipse Public License 1.0 (the same as Clojure).
