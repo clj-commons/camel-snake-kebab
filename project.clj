@@ -2,7 +2,7 @@
   :min-lein-version "2.5.2"
 
   :description "A library for word case conversions."
-  :url "https://github.com/qerub/camel-snake-kebab"
+  :url "https://clj-commons.org/camel-snake-kebab/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git"
