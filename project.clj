@@ -6,7 +6,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git"
-        :url "https://github.com/qerub/camel-snake-kebab"}
+        :url "https://github.com/clj-commons/camel-snake-kebab.git"}
 
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
                                   [org.clojure/clojurescript "1.7.228" :scope "provided"]]
