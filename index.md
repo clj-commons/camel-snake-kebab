@@ -102,18 +102,6 @@ Yeah, and then there are the type-converting functions:
 ; => {"firstName" "John", "lastName" "Smith"}
 ```
 
-## With JavaBeans
-
-```clojure
-(require '[camel-snake-kebab.extras :as ckse])
-
-(->> (java.util.Date.)
-     (bean)
-     (cske/transform-keys csk/->kebab-case)
-     :timezone-offset)
-; => -120
-```
-
 ## With Memoization
 
 If you're going to do case conversion in a hot spot, use [core.memoize](https://github.com/clojure/core.memoize) to avoid doing the same conversions over and over again.
