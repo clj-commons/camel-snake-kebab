@@ -128,7 +128,7 @@ If you're going to do case conversion in a hot spot, use [core.memoize](https://
 # Alternatives
 
 * [org.tobereplaced/lettercase](https://github.com/ToBeReplaced/lettercase)
-* [com.google.common.base.CaseFormat](http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/base/CaseFormat.html)
+* [com.google.common.base.CaseFormat](https://github.com/google/guava/blob/86eabf1fe6991cf7fbc65980dac59a604303b362/guava/src/com/google/common/base/CaseFormat.java)
 
 # License
 
