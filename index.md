@@ -34,13 +34,13 @@ The `:separator` argument can either be a regex, string or character.
 
 # Installation
 
-1. Add the following to your `project.clj` `:dependencies`:
+Add the following to your `project.clj` `:dependencies`:
 
 ```clojure
 [camel-snake-kebab "0.4.0"]
 ```
 
-2. Add the following to your namespace declaration:
+Add the following to your namespace declaration:
 
 ```clojure
 (:require [camel-snake-kebab.core :as csk])
