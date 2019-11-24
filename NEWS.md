@@ -1,5 +1,9 @@
 # News
 
+## 2019-11-24: 0.4.1 - The Switzerland Release
+
+* Declares macro-generated symbols so that tools like Cursive that use static analysis can find them.
+
 ## 2016-04-16: 0.4.0 - The Malmö Release
 
 * Uses reader conditionals instead of cljx.
