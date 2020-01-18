@@ -1,4 +1,4 @@
-(ns camel-snake-kebab.internals.alter-name
+(ns ^:no-doc camel-snake-kebab.internals.alter-name
   #?(:clj (:import (clojure.lang Keyword Symbol))))
 
 (defprotocol AlterName

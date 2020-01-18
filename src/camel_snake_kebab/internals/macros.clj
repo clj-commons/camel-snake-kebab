@@ -1,4 +1,4 @@
-(ns camel-snake-kebab.internals.macros
+(ns ^:no-doc camel-snake-kebab.internals.macros
   (:require [camel-snake-kebab.internals.alter-name :refer [alter-name]]
             [camel-snake-kebab.internals.misc :refer [convert-case]]))
 

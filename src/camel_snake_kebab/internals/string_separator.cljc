@@ -1,4 +1,4 @@
-(ns camel-snake-kebab.internals.string-separator
+(ns ^:no-doc camel-snake-kebab.internals.string-separator
   #?(:clj (:import (java.util.regex Pattern))))
 
 #?(:clj (set! *warn-on-reflection* true))

@@ -1,4 +1,4 @@
-(ns camel-snake-kebab.internals.misc
+(ns ^:no-doc camel-snake-kebab.internals.misc
   (:require [camel-snake-kebab.internals.string-separator :refer [split generic-separator]]
             [clojure.string :refer [join upper-case capitalize]]))
 
