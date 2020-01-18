@@ -34,6 +34,8 @@ The `:separator` argument can either be a regex, string or character.
 
 # Installation
 
+[camel-snake-kebab is readily available from Clojars.](https://clojars.org/camel-snake-kebab)
+
 Add the following to your `project.clj` `:dependencies`:
 
 ```clojure
