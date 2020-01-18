@@ -39,4 +39,4 @@ jobs:
           key: v1-dependencies-{{ checksum "project.clj" }}
 
       # run tests!
-      - run: lein with-profile dev:dev,1.8:dev,1.9:dev,1.10 test-all
+      - run: lein test-all

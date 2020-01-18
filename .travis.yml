@@ -1,6 +1,6 @@
 language: clojure
 
-script: lein with-profile dev:dev,1.8:dev,1.9:dev,1.10 test-all
+script: lein test-all
 
 jdk:
   - openjdk8

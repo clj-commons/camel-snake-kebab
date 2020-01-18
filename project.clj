@@ -8,18 +8,10 @@
   :scm {:name "git"
         :url "https://github.com/clj-commons/camel-snake-kebab"}
 
-  :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
-                                  [org.clojure/clojurescript "1.7.228" :scope "provided"]]
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.10.0"]
+                                  [org.clojure/clojurescript "1.10.520" :scope "provided"]]
                    :plugins [[lein-cljsbuild "1.1.3"]
-                             [lein-doo "0.1.6"]]}
-
-             :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}
-
-             :1.9 {:dependencies [[org.clojure/clojure "1.9.0"]
-                                  [org.clojure/clojurescript "1.9.946" :scope "provided"]]}
-
-             :1.10 {:dependencies [[org.clojure/clojure "1.10.0"]
-                                   [org.clojure/clojurescript "1.10.520" :scope "provided"]]}}
+                             [lein-doo "0.1.6"]]}}
 
   :jar-exclusions [#"\.DS_Store"]
 
