@@ -64,6 +64,7 @@
   (testing "returns idiomatic response for type converting functions on nil input"
     (is (nil? (csk/->kebab-case-keyword nil)))
     (is (= "" (csk/->kebab-case-string nil)))
-    (is (thrown? IllegalArgumentException (csk/->kebab-case-symbol nil))))
+    #?(:clj (is (thrown? IllegalArgumentException (csk/->kebab-case-symbol nil)))
+       :cljs (is (thrown? js/Error (csk/->kebab-case-symbol nil)))))
   (testing "returns idiomatic response for non-type converting functions on nil input"
     (is (nil? (csk/->kebab-case nil)))))
