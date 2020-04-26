@@ -59,3 +59,11 @@
     "X-SSL-Cipher"     "x-ssl-cipher"
     "X-WAP-Profile"    "x-wap-profile"
     "X-XSS-Protection" "x-xss-protection"))
+
+(deftest nils-test
+  (testing "returns idiomatic response for type converting functions on nil input"
+    (is (nil? (csk/->kebab-case-keyword nil)))
+    (is (= "" (csk/->kebab-case-string nil)))
+    (is (thrown? IllegalArgumentException (csk/->kebab-case-symbol nil))))
+  (testing "returns idiomatic response for non-type converting functions on nil input"
+    (is (nil? (csk/->kebab-case nil)))))

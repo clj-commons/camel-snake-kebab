@@ -13,10 +13,13 @@
                  (convert-case (resolve first-fn) (resolve rest-fn) sep)
                  (str "->")
                  (symbol)))]
-    (for [[type-label type-converter] {"string" `identity "symbol" `symbol "keyword" `keyword}]
+    (for [[type-label [type-converter nil-value]] {"string"  [`identity ""]
+                                                   "symbol"  [`symbol nil]
+                                                   "keyword" [`keyword nil]}]
       `(defn ~(make-name type-label) [s# & rest#]
-         {:pre [(not (nil? s#))]}
-         (~type-converter (apply convert-case ~first-fn ~rest-fn ~sep (name s#) rest#))))))
+         (~type-converter (if (some? s#)
+                            (apply convert-case ~first-fn ~rest-fn ~sep (name s#) rest#)
+                            ~nil-value))))))
 
 (defmacro defconversion [case-label first-fn rest-fn sep]
   `(do  ~(type-preserving-function  case-label first-fn rest-fn sep)

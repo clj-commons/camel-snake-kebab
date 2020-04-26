@@ -20,4 +20,8 @@
   (alter-name [this f]
     (if (namespace this)
       (throw (ex-info "Namespaced symbols are not supported" {:input this}))
-      (-> this name f symbol))))
+      (-> this name f symbol)))
+
+  nil
+  (alter-name [_ _]
+    nil))
