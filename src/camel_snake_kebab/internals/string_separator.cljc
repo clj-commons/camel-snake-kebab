@@ -1,4 +1,5 @@
 (ns ^:no-doc camel-snake-kebab.internals.string-separator
+  (:require [clojure.string :as string])
   #?(:clj (:import (java.util.regex Pattern))))
 
 #?(:clj (set! *warn-on-reflection* true))
@@ -8,7 +9,7 @@
 
 #?(:clj
    (letfn [(split-by-pattern [^Pattern p, ^String s]
-             (seq (.split p s)))
+             (string/split s p))
            ;; These could be optimized e.g. by using StringUtils in Apache Commons:
            (split-by-string [^String p, ^String s]
              (split-by-pattern (-> p Pattern/quote Pattern/compile) s))
@@ -25,10 +26,10 @@
      ;; * Using js/RegExp generates a warning, but what's the right way?
 
      js/RegExp
-     (split [this s] (seq (.split s this)))
+     (split [this s] (string/split s this))
 
      string
-     (split [this s] (seq (.split s this)))))
+     (split [this s] (string/split s this))))
 
 (defn classify-char [c]
   (case c
