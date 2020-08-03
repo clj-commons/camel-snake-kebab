@@ -10,6 +10,10 @@
            (= [""]          (split sep "")))
       #"\." "." \.))
 
+  (testing "input consisting of separator(s)"
+    (is (empty? (split "x" "x")))
+    (is (empty? (split "x" "xx"))))
+
   (testing "generic separator"
     (are [x y]
       (= x (split generic-separator y))
