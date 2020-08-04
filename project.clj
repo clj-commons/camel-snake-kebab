@@ -26,5 +26,4 @@
                                    :target :nodejs
                                    :optimizations :simple}}]}
 
-  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once"]
-            "test-planck" ["doo" "planck" "test" "once"]})
+  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once," "doo" "planck" "test" "once"]})
