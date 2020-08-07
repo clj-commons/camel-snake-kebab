@@ -11,7 +11,7 @@
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.10.0"]
                                   [org.clojure/clojurescript "1.10.520" :scope "provided"]]
                    :plugins [[lein-cljsbuild "1.1.3"]
-                             [lein-doo "0.1.6"]]}}
+                             [lein-doo "0.1.11"]]}}
 
   :jar-exclusions [#"\.DS_Store"]
 
@@ -26,4 +26,4 @@
                                    :target :nodejs
                                    :optimizations :simple}}]}
 
-  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once"]})
+  :aliases {"test-all" ["do" "test," "doo" "node" "test" "once," "doo" "planck" "test" "once"]})

@@ -1,6 +1,13 @@
 (ns ^:no-doc camel-snake-kebab.internals.macros
+  #?(:cljs (:refer-clojure :exclude [resolve]))
   (:require [camel-snake-kebab.internals.alter-name :refer [alter-name]]
             [camel-snake-kebab.internals.misc :refer [convert-case]]))
+
+#?(:cljs
+   (defn resolve [sym]
+     ;; On self-hosted ClojureScript, macros are evaluated under the `:cljs` conditional branch
+     ;; In that case, we need to use `eval` in order to resolve variables instead of `resolve`
+     (eval `(~'var ~sym))))
 
 (defn type-preserving-function [case-label first-fn rest-fn sep]
   `(defn ~(symbol (str "->" case-label)) [s# & rest#]
