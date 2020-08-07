@@ -39,8 +39,7 @@ jobs:
           key: v1-dependencies-{{ checksum "project.clj" }}
 
       # install planck
-      - run: wget https://planck-repl.org/releases/2.25.0-debian-9.0-x86_64/planck && chmod a+x planck &&  sudo mv planck /usr/local/bin
-      - run: sudo apt-get install clojure
+      - run: wget https://planck-repl.org/releases/2.25.0-debian-9.0-x86_64/planck && chmod a+x planck && sudo mv planck /usr/local/bin
       - run: sudo apt-get install libjavascriptcoregtk-4.0-18
       - run: sudo apt-get install libzip4
 
