@@ -5,7 +5,7 @@
 
 #?(:cljs
    (defn resolve [sym]
-     ;; On Self hosted ClojureScript, macros are evaluated under the `:cljs` conditional branch
+     ;; On self-hosted ClojureScript, macros are evaluated under the `:cljs` conditional branch
      ;; In that case, we need to use `eval` in order to resolve variables instead of `resolve`
      (eval `(~'var ~sym))))
 
