@@ -22,7 +22,6 @@
                  (symbol)))]
     (for [[type-label type-converter] {"string" `identity "symbol" `symbol "keyword" `keyword}]
       `(defn ~(make-name type-label) [s# & rest#]
-         {:pre [(not (nil? s#))]}
          (~type-converter (apply convert-case ~first-fn ~rest-fn ~sep (name s#) rest#))))))
 
 (defmacro defconversion [case-label first-fn rest-fn sep]
