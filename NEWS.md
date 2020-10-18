@@ -1,6 +1,13 @@
 # News
 
-## 2019-11-24: 0.4.1 - The Switzerland Release
+## 2020-10-18: 0.4.2
+
+* Supports self-hosted ClojureScript.
+* Splits strings consistently between CLJ and CLJS.
+* Doesn't throw NPE when input only consists of separator(s).
+* Doesn't throw AssertionError on `nil` input.
+
+## 2019-11-24: 0.4.1
 
 * Declares macro-generated symbols so that tools like Cursive that use static analysis can find them.
 
