@@ -4,8 +4,9 @@
 
 (defn convert-case [first-fn rest-fn sep s & {:keys [separator]
                                               :or   {separator generic-separator}}]
-  (let [[first & rest] (split separator s)]
-    (join sep (cons (first-fn first) (map rest-fn rest)))))
+  (if-let [[first & rest] (seq (split separator s))]
+    (join sep (cons (first-fn first) (map rest-fn rest)))
+    ""))
 
 (def upper-case-http-headers
   #{"CSP" "ATT" "WAP" "IP" "HTTP" "CPU" "DNT" "SSL" "UA" "TE" "WWW" "XSS" "MD5"})
