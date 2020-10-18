@@ -36,9 +36,9 @@ The `:separator` argument can either be a regex, string or character.
 
 [camel-snake-kebab is readily available from Clojars.](https://clojars.org/camel-snake-kebab)
 
-If you're using Leiningen, then add `[camel-snake-kebab "0.4.1"]` to your `project.clj` `:dependencies`.
+If you're using Leiningen, then add `[camel-snake-kebab "0.4.2"]` to your `project.clj` `:dependencies`.
 
-For [deps](https://clojure.org/guides/deps_and_cli), use `{camel-snake-kebab {:mvn/version "0.4.1"}}`.
+For [deps](https://clojure.org/guides/deps_and_cli), use `{camel-snake-kebab {:mvn/version "0.4.2"}}`.
 
 Then add the following to your namespace declaration:
 
