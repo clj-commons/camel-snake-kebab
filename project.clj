@@ -3,7 +3,7 @@
 
   :description "A library for word case conversions."
   :url "https://clj-commons.org/camel-snake-kebab/"
-  :license {:name "Eclipse Public License"
+  :license {:name "Eclipse Public License 1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git"
         :url "https://github.com/clj-commons/camel-snake-kebab"}
