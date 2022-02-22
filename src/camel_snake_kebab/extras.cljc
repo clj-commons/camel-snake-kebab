@@ -5,4 +5,4 @@
   "Recursively transforms all map keys in coll with t."
   [t coll]
   (letfn [(transform [[k v]] [(t k) v])]
-    (postwalk (fn [x] (if (map? x) (into {} (map transform x)) x)) coll)))
+    (postwalk (fn [x] (if (map? x) (with-meta (into {} (map transform x)) (meta x)) x)) coll)))
