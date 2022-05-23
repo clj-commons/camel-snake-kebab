@@ -1,4 +1,4 @@
-(defproject camel-snake-kebab "0.4.3-SNAPSHOT"
+(defproject camel-snake-kebab "0.4.3"
   :min-lein-version "2.5.2"
 
   :description "A library for word case conversions."
