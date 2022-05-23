@@ -1,5 +1,9 @@
 # News
 
+## 2022-05-23: 0.4.3
+
+* `transform-keys` now keeps metadata.
+
 ## 2020-10-18: 0.4.2
 
 * Supports self-hosted ClojureScript.
