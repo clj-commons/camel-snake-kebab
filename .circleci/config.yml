@@ -1,18 +1,8 @@
-# Clojure CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-clojure/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/clojure:lein-2.9.1-node
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: clojure:temurin-23-lein-noble
 
     working_directory: ~/repo
 
@@ -24,26 +14,47 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "project.clj" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: lein deps
+      - run:
+          name: Bring down deps
+          command: lein deps
 
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "project.clj" }}
 
-      # install planck
-      - run: sudo apt-get update
-      - run: sudo apt-get install libgnutls30
-      - run: sudo apt-get install libjavascriptcoregtk-4.0-18
-      - run: sudo apt-get install libzip4
-      - run: wget https://planck-repl.org/releases/2.25.0-debian-9.0-x86_64/planck && chmod a+x planck && sudo mv planck /usr/local/bin
+      - run:
+          name: Install Planck
+          command: |
+            apt-get update
+            apt-get install -y software-properties-common
 
-      # run tests!
-      - run: lein test-all
+            # There are no recent planck binaries, so bring in necessary support from older ubuntu versions
+            add-apt-repository -y "deb http://cz.archive.ubuntu.com/ubuntu focal main universe"
+            add-apt-repository -y "deb http://security.ubuntu.com/ubuntu focal-security main"
+
+            # not automatically installed by planck, but needed by planck, so compensate
+            DEBIAN_FRONTEND=noninteractive apt-get install -y libicu66 libjavascriptcoregtk-4.0-18
+
+            wget https://launchpad.net/~mfikes/+archive/ubuntu/planck/+files/planck_2.25.0-1ppa1~focal1_amd64.deb
+            apt-get install ./planck_2.25.0-1ppa1~focal1_amd64.deb
+
+      - run:
+          name: Tools Versions
+          command: |
+            echo lein --version
+            lein --version
+            echo java -version
+            java -version
+            echo planck --version
+            planck --version
+
+      - run:
+          name: Test
+          command: lein test-all
