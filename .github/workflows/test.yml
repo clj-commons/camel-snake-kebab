@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - master
+    - lread/maint-2025-03-17 # temp for testing
   pull_request:
     branches:
     - master
