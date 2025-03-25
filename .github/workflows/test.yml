@@ -38,7 +38,7 @@ jobs:
         java-version: ${{ matrix.java-version }}
 
     - name: Install Babashka & Clojure
-      uses: DeLaGuardo/setup-clojure@13.2
+      uses: DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360
       with:
         lein: 'latest'
 
