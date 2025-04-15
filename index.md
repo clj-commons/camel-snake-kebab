@@ -1,4 +1,6 @@
-# Examples
+# camel-snake-kebab
+
+## Examples
 
 ```clojure
 (require '[camel-snake-kebab.core :as csk])
@@ -32,7 +34,7 @@ If the default way of separating words doesn't work in your use case, you can ov
 
 The `:separator` argument can either be a regex, string or character.
 
-# Installation
+## Installation
 
 [camel-snake-kebab is readily available from Clojars.](https://clojars.org/camel-snake-kebab)
 
@@ -46,7 +48,7 @@ Then add the following to your namespace declaration:
 (:require [camel-snake-kebab.core :as csk])
 ```
 
-# Available Conversion Functions
+## Available Conversion Functions
 
 * `csk/->PascalCase`
 * `csk/->camelCase`
@@ -68,13 +70,13 @@ Yeah, and then there are the type-converting functions:
 * `csk/->Camel_Snake_Case_{Keyword, String, Symbol}`
 * `csk/->HTTP-Header-Case-{Keyword, String, Symbol}`
 
-# Notes
+## Notes
 
 * Namespaced keywords and symbols will be rejected with an exception.
 
-# Serving Suggestions
+## Serving Suggestions
 
-## With JSON
+### With JSON
 
 ```clojure
 (require '[clojure.data.json :as json])
@@ -88,7 +90,7 @@ Yeah, and then there are the type-converting functions:
 ; => "{\"firstName\":\"John\",\"lastName\":\"Smith\"}"
 ```
 
-## With Plain Maps
+### With Plain Maps
 
 ```clojure
 (require '[camel-snake-kebab.extras :as cske])
@@ -102,7 +104,7 @@ Yeah, and then there are the type-converting functions:
 ; => {"firstName" "John", "lastName" "Smith"}
 ```
 
-## With Memoization
+### With Memoization
 
 If you're going to do case conversion in a hot spot, use [core.memoize](https://github.com/clojure/core.memoize) to avoid doing the same conversions over and over again.
 
@@ -120,17 +122,17 @@ If you're going to do case conversion in a hot spot, use [core.memoize](https://
 ; ... Execution time mean : 700,146806 ns ...
 ```
 
-# Further Reading
+## Further Reading
 
 * [ToCamelCaseorUnderscore](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.158.9499)
 * [Wikipedia about usage of letter case in computer programming](http://en.wikipedia.org/wiki/Letter_case#Computers)
 
-# Alternatives
+## Alternatives
 
 * [org.tobereplaced/lettercase](https://github.com/ToBeReplaced/lettercase)
 * [com.google.common.base.CaseFormat](https://github.com/google/guava/blob/86eabf1fe6991cf7fbc65980dac59a604303b362/guava/src/com/google/common/base/CaseFormat.java)
 
-# License
+## License
 
 Copyright (C) 2012-2020 the AUTHORS.
 
